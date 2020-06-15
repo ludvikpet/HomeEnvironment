@@ -39,10 +39,8 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        sensorManager = (SensorManager) view.getContext().getSystemService(SENSOR_SERVICE);
-        lightSensor = sensorManager.getDefaultSensor(TYPE_LIGHT);
-        luxText = (TextView) view.findViewById(R.id.Lux_Measurement);
-
+        mLightSensor = new appLightSensor(view);
+        luxText = view.findViewById(R.id.Lux_Measurement);
 
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,34 +50,13 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        lightEventListener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                Toast.makeText(getContext(), "sensor changed", Toast.LENGTH_SHORT).show();
-                lightQuantity = sensorEvent.values[0];
-            }
-
-            //Denne funktion skal være der for SensorEventListeners
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-
-            }
-        };
-
-        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_FASTEST);
 
         view.findViewById(R.id.MeasuringLightButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lightSensor == null) {
-                    Toast.makeText(view.getContext(), "This phone doesn't have a lightsensor", Toast.LENGTH_SHORT).show();
-                } else {
-                    luxText.setText(" This is the current lux " + lightQuantity);
-                }
+                    luxText.setText(" This is the current lux " + mLightSensor.getLux());
 
-                //luxText.getText();
-                //Log.i("MainActivity","This is the text of the textview " + luxText.getText());
-                //luxText.setText("This is the current lux " + lightQuantity);
+
 
             }
         });
