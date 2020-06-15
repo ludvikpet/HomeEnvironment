@@ -1,6 +1,7 @@
-package course.examples.homeenvironment;
+package com.example.homeenvironment;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
