@@ -13,10 +13,10 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
-import com.example.homeenvironment.Sensors.appLightSensor;
+import com.example.homeenvironment.Sensors.AppLightSensor;
 
 public class FirstFragment extends Fragment {
-    private appLightSensor mLightSensor;
+    private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
     private AppTemperatureSensor mTemperatureSensor;
     private SensorEventListener lightEventListener;
@@ -38,7 +38,7 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLightSensor = new appLightSensor(view);
+        mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
         luxText = view.findViewById(R.id.Lux_Measurement);
