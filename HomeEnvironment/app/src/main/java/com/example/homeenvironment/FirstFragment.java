@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -21,6 +22,7 @@ import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
 
 public class FirstFragment extends Fragment {
+    private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
     private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
     private AppTemperatureSensor mTemperatureSensor;
@@ -53,13 +55,21 @@ public class FirstFragment extends Fragment {
         humidityText = view.findViewById(R.id.humidityID);
         temperatureText = view.findViewById(R.id.temperatureID);
         noiseLevelText = view.findViewById(R.id.noiseID);
-        noiseLevel = new NoiseLevel(view);
+        if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
+            noiseLevel = new NoiseLevel(view);
+            noiseLevel.startRecorder();
+        }
         setInfo();
 
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    noiseLevel.stopRecorder();
+                } catch (RuntimeException stopException) {
+
+                }
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
@@ -74,17 +84,21 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
-                    pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
-                    humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
-                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
+                pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
+                humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
+                temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
+                    noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
+                } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
+                }
             }
         });
     }
 
-    private void setInfo(){
-        luxText.setText(getString(R.string.lightLevelInfo,0));
+    private void setInfo() {
+        luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
         temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
