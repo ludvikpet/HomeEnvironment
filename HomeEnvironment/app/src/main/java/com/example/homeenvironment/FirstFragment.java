@@ -3,19 +3,33 @@ package com.example.homeenvironment;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import java.util.Objects;
+import com.example.homeenvironment.Sensors.AppBarometerSensor;
+import com.example.homeenvironment.Sensors.AppTemperatureSensor;
+import com.example.homeenvironment.Sensors.NoiseLevel;
+import com.example.homeenvironment.Sensors.appLightSensor;
 
 public class FirstFragment extends Fragment {
+    private appLightSensor mLightSensor;
+    private AppBarometerSensor mBarometerSensor;
+    private AppTemperatureSensor mTemperatureSensor;
+    private SensorEventListener lightEventListener;
+    private float maxValue;
+    private float lightQuantity;
+    private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
+    private NoiseLevel noiseLevel;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -27,8 +41,21 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mLightSensor = new appLightSensor(view);
+        mBarometerSensor = new AppBarometerSensor(view);
+        mTemperatureSensor = new AppTemperatureSensor(view);
+        //luxText = view.findViewById(R.id.Lux_Measurement);
+        //pressureText = view.findViewById(R.id.pressureSensorView);
+        //humidityText = view.findViewById(R.id.Humidity_Text);
+        //temperatureText = view.findViewById(R.id.Temperature_Text);
+        luxText = view.findViewById(R.id.lightID);
+        pressureText = view.findViewById(R.id.pressureID);
+        humidityText = view.findViewById(R.id.humidityID);
+        temperatureText = view.findViewById(R.id.temperatureID);
+        noiseLevelText = view.findViewById(R.id.noiseID);
+        noiseLevel = new NoiseLevel(view);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
@@ -36,11 +63,20 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.button_noiselevel).setOnClickListener(new View.OnClickListener() {
+//        view.findViewById(R.id.button_noiselevel).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                    NavHostFragment.findNavController(FirstFragment.this)
+//                            .navigate(R.id.action_FirstFragment_to_Noiselevel);
+
+        view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    NavHostFragment.findNavController(FirstFragment.this)
-                            .navigate(R.id.action_FirstFragment_to_Noiselevel);
+                    luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
+                    pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
+                    humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
+                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                    noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
             }
         });
     }
