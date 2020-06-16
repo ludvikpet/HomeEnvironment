@@ -1,33 +1,32 @@
 package com.example.homeenvironment;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import static android.content.Context.SENSOR_SERVICE;
-import static android.hardware.Sensor.TYPE_LIGHT;
+import com.example.homeenvironment.Sensors.AppBarometerSensor;
+import com.example.homeenvironment.Sensors.AppTemperatureSensor;
+import com.example.homeenvironment.Sensors.appLightSensor;
 
 public class FirstFragment extends Fragment {
     private appLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
+    private AppTemperatureSensor mTemperatureSensor;
     private SensorEventListener lightEventListener;
     private float maxValue;
     private float lightQuantity;
     private TextView luxText;
     private TextView pressureText;
     private TextView humidityText;
+    private TextView temperatureText;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -41,9 +40,11 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mLightSensor = new appLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
+        mTemperatureSensor = new AppTemperatureSensor(view);
         luxText = view.findViewById(R.id.Lux_Measurement);
         pressureText = view.findViewById(R.id.pressureSensorView);
         humidityText = view.findViewById(R.id.Humidity_Text);
+        temperatureText = view.findViewById(R.id.Temperature_Text);
 
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,7 @@ public class FirstFragment extends Fragment {
                     luxText.setText(" This is the current lux " + mLightSensor.getLux());
                     pressureText.setText("This is the current pressure " + mBarometerSensor.getPressure());
                     humidityText.setText("This is the current humidity " + mBarometerSensor.getHumidity());
-
+                    temperatureText.setText("This is the current temperature " + mTemperatureSensor.getTemperature());
 
 
             }

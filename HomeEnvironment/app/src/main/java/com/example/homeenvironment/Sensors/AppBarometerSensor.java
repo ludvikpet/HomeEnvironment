@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Sensors;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

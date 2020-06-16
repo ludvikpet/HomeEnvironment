@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Sensors;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,13 +18,11 @@ public class appLightSensor {
     private SensorEventListener lightEventListener;
     private float lightQuantity;
     private View view;
-    TextView luxText;
 
     public appLightSensor(View view){
         this.view = view;
         sensorManager = (SensorManager) view.getContext().getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(TYPE_LIGHT);
-        luxText = (TextView) view.findViewById(R.id.Lux_Measurement);
 
         lightEventListener = new SensorEventListener() {
             @Override
