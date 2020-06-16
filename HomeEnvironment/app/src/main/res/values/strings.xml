@@ -4,9 +4,21 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for Buttons -->
+    <string name="tipsButton">Tips</string>
+    <string name="measureButton">Measure Environment</string>
+
+    <!-- Strings used for TextViews -->
+    <string name="tempText">Temperature</string>
+    <string name="LightLevelText"> Light Level</string>
+    <string name="noiseText">Noise Level</string>
+    <string name="humidityText">Humidity</string>
+    <string name="pressureText">Pressure</string>
+    <!--    Strings used for information-->
+    <string name="tempInfo">%1$.1f %2$s</string>
+    <string name="lightLevelInfo">%1$d Lux</string>
+    <string name="noiseInfo">%1$.2f dB</string>
+    <string name="humidityInfo">%1$d %%</string>
+    <string name="pressureInfo">%1$d Pa</string>
 </resources>

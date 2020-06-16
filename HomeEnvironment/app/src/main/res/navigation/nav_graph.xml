@@ -12,8 +12,11 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+        android:id="@+id/action_FirstFragment_to_SecondFragment"
+        app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_Noiselevel"
+            app:destination="@id/soundMeter" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +28,12 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/soundMeter"
+        android:name="com.example.homeenvironment.Sensors.NoiseLevel"
+        android:label="acivity_main2"
+        tools:layout="@layout/acivity_main2" />
+         <action
+            android:id="@+id/action_Noiselevel_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
 </navigation>
