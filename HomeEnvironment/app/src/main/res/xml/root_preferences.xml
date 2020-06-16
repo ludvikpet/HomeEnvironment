@@ -9,9 +9,7 @@
             android:defaultValue="false"
             android:key="test"
             android:title="Test" />
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="Notifications" />
+
 
         <ListPreference
             app:defaultValue="reply"
