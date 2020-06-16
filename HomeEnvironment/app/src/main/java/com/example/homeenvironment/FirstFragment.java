@@ -54,6 +54,8 @@ public class FirstFragment extends Fragment {
         temperatureText = view.findViewById(R.id.temperatureID);
         noiseLevelText = view.findViewById(R.id.noiseID);
         noiseLevel = new NoiseLevel(view);
+        setInfo();
+
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +81,14 @@ public class FirstFragment extends Fragment {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
             }
         });
+    }
+
+    private void setInfo(){
+        luxText.setText(getString(R.string.lightLevelInfo,0));
+        pressureText.setText(getString(R.string.pressureInfo, 0));
+        humidityText.setText(getString(R.string.humidityInfo, 0));
+        temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
+        noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
     }
 
 }

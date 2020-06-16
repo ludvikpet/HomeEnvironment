@@ -59,12 +59,12 @@ public class AppBarometerSensor {
 
 
 
-    public float getPressure(){
+    public int getPressure(){
         if(pressureSensor == null) Toast.makeText(view.getContext(),"Your phone doesn't have a pressure sensor", Toast.LENGTH_SHORT);
-        return pressureAmount;
+        return (int) pressureAmount;
     }
-    public float getHumidity(){
+    public int getHumidity(){
         if(pressureSensor == null) Toast.makeText(view.getContext(),"Your phone doesn't have a pressure sensor", Toast.LENGTH_SHORT);
-        return humidityAmount;
+        return (int) humidityAmount;
     }
 }

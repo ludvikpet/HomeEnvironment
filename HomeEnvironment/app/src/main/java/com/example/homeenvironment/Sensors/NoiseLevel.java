@@ -1,7 +1,6 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Sensors;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -10,7 +9,10 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import com.example.homeenvironment.R;
 
 public class NoiseLevel extends AppCompatActivity {
 
@@ -21,8 +23,9 @@ public class NoiseLevel extends AppCompatActivity {
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
     private final static String TAG = "Noise Level ";
-    final Handler mHandler = new Handler();
-    boolean permission = false;
+    private final Handler mHandler = new Handler();
+    private boolean permission;
+    private View view;
 
 
     final Runnable updater = new Runnable() {
@@ -32,13 +35,15 @@ public class NoiseLevel extends AppCompatActivity {
     };
 
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.acivity_main2);
-        mStatusView = findViewById(R.id.noiselevel);
-        mStatusView.setText("0.00 dB");
-        permission = ContextCompat.checkSelfPermission(NoiseLevel.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+    public NoiseLevel(View view){
+        this.view = view;
+        Log.i(TAG, "CREATION");
+//        setContentView(R.layout.fragment_first);
+//        mStatusView = findViewById(R.id.noiseID);
+//        mStatusView.setText("0.00 dB");
+        permission = ContextCompat.checkSelfPermission(this.view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
         if (runner == null && permission) {
             runner = new Thread() {
                 public void run() {
@@ -103,7 +108,7 @@ public class NoiseLevel extends AppCompatActivity {
     }
 
     public void updateTv() {
-        mStatusView.setText(getString(R.string.noise, (float) soundDb(10 * Math.exp(-3))));
+//        mStatusView.setText(getString(R.string.noiseInfo, (float) soundDb(10 * Math.exp(-3))));
     }
 
     public double soundDb(double ampl) {
@@ -123,5 +128,7 @@ public class NoiseLevel extends AppCompatActivity {
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
         return mEMA;
     }
-
+    public float getNoiseLevel(){
+        return (float) soundDb(10 * Math.exp(-3));
+    }
 }

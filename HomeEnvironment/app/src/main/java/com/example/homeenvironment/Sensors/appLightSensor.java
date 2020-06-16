@@ -38,9 +38,9 @@ public class appLightSensor {
         };
         sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
     }
-    public float getLux(){
+    public int getLux(){
         if(lightSensor == null) Toast.makeText(view.getContext(), "This phone doesn't have a lightsensor", Toast.LENGTH_SHORT).show();
-        return lightQuantity;
+        return (int) lightQuantity;
 
 
     }
