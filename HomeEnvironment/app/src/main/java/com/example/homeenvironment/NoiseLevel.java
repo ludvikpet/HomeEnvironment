@@ -73,8 +73,8 @@ public class NoiseLevel extends AppCompatActivity {
         if (mRecorder == null && permission) {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC);
             mRecorder.setOutputFile("/dev/null");
             try {
                 mRecorder.prepare();
