@@ -41,12 +41,16 @@ public class FirstFragment extends Fragment {
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
-        luxText = view.findViewById(R.id.Lux_Measurement);
-        pressureText = view.findViewById(R.id.pressureSensorView);
-        humidityText = view.findViewById(R.id.Humidity_Text);
-        temperatureText = view.findViewById(R.id.Temperature_Text);
+        //luxText = view.findViewById(R.id.Lux_Measurement);
+        //pressureText = view.findViewById(R.id.pressureSensorView);
+        //humidityText = view.findViewById(R.id.Humidity_Text);
+        //temperatureText = view.findViewById(R.id.Temperature_Text);
+        luxText = view.findViewById(R.id.lightID);
+        pressureText = view.findViewById(R.id.pressureID);
+        humidityText = view.findViewById(R.id.humidityID);
+        temperatureText = view.findViewById(R.id.temperatureID);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
@@ -55,13 +59,13 @@ public class FirstFragment extends Fragment {
         });
 
 
-        view.findViewById(R.id.MeasuringLightButton).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    luxText.setText(" This is the current lux " + mLightSensor.getLux());
-                    pressureText.setText("This is the current pressure " + mBarometerSensor.getPressure());
-                    humidityText.setText("This is the current humidity " + mBarometerSensor.getHumidity());
-                    temperatureText.setText("This is the current temperature " + mTemperatureSensor.getTemperature());
+                    luxText.setText("" + mLightSensor.getLux());
+                    pressureText.setText("" + mBarometerSensor.getPressure());
+                    humidityText.setText("" + mBarometerSensor.getHumidity());
+                    temperatureText.setText("" + mTemperatureSensor.getTemperature());
 
 
             }

@@ -1,5 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+
+    <!-- Temperature -->
+
+    <TextView
+        android:id="@+id/tempTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+
+        android:text="@string/tempText"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/temperatureID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tempTextView"
+
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:text="0*C"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <!-- Pressure level -->
+    <TextView
+        android:id="@+id/pressureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/temperatureID"
+        android:layout_marginTop="15dp"
+        android:text="@string/pressureText"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/pressureID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pressureTextView"
+        android:layout_marginTop="5dp"
+
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:text="0Pa"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <!-- Light level -->
+
+    <TextView
+        android:id="@+id/lightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pressureID"
+        android:layout_marginTop="15dp"
+        android:text="@string/LightLevelText"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/lightID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lightTextView"
+        android:layout_marginTop="5dp"
+
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:inputType="numberDecimal"
+        android:gravity="center"
+        android:text="0lux"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <!-- Humidity level -->
+
+    <TextView
+        android:id="@+id/humidityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lightID"
+        android:layout_marginTop="15dp"
+        android:text="@string/humidityText"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/humidityID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/humidityTextView"
+        android:layout_marginTop="5dp"
+        android:ems="8"
+        android:background="@drawable/value_shape"
+        android:inputType="numberDecimal"
+        android:text="5g/m^3"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="italic" />
+
+    <!-- Noise -->
+
+    <TextView
+        android:id="@+id/noiseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/humidityID"
+        android:layout_marginTop="15dp"
+        android:text="@string/noiseText"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/noiseID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/noiseTextView"
+        android:layout_marginTop="5dp"
+        android:ems="8"
+        android:background="@drawable/value_shape"
+        android:inputType="numberDecimal"
+        android:text="0dB"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="italic" />
+
+    <!-- Buttons -->
+
+    <Button
+        android:id="@+id/tipsButton"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/noiseID"
+        android:background="@drawable/custom_button"
+        android:text="@string/tipsButton"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/measureButton"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tipsButton"
+        android:background="@drawable/custom_button"
+        android:text="@string/measureButton"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+
+    <!-- Information -->
+
+    <TextView
+        android:id="@+id/tempInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/temperatureID"
+        android:layout_alignBottom="@+id/temperatureID"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/pressureInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/pressureID"
+        android:layout_alignBottom="@+id/pressureID"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/lightInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_toRightOf="@+id/lightID"
+        android:layout_alignBottom="@+id/lightID"
+
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/humidityInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/humidityID"
+        android:layout_alignBottom="@+id/humidityID"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:background="@drawable/circle_info_shape"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/noiseInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/noiseID"
+        android:layout_alignBottom="@+id/noiseID"
+        android:layout_marginBottom="5dp"
+        android:layout_marginHorizontal="10dp"
+
+        android:background="@drawable/circle_info_shape"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textStyle="italic" />
+
+
+</RelativeLayout>
+
+
+<!-- <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -66,4 +339,4 @@
         app:layout_constraintTop_toBottomOf="@id/Humidity_Text"
         android:gravity="center"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout> -->
