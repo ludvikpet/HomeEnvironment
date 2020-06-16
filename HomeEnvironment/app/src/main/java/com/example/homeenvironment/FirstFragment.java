@@ -49,6 +49,7 @@ public class FirstFragment extends Fragment {
         pressureText = view.findViewById(R.id.pressureID);
         humidityText = view.findViewById(R.id.humidityID);
         temperatureText = view.findViewById(R.id.temperatureID);
+        final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
