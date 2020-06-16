@@ -31,6 +31,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="forMeasuringLight"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="568dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_first"
+        app:layout_constraintVertical_bias="0.706" />
+
+    <TextView
+        android:id="@+id/pressureSensorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+
+
+        android:text="This is for measuring pressure!"
+        app:layout_constraintTop_toBottomOf="@id/Lux_Measurement"
+        tools:layout_editor_absoluteX="125dp" />
+
+    <TextView
+        android:id="@+id/Humidity_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is for measuring humidity!"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="288dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

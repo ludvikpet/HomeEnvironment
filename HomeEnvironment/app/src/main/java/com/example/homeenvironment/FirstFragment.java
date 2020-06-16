@@ -21,13 +21,13 @@ import static android.hardware.Sensor.TYPE_LIGHT;
 
 public class FirstFragment extends Fragment {
     private appLightSensor mLightSensor;
-    private SensorManager sensorManager;
-    private Sensor lightSensor;
+    private AppBarometerSensor mBarometerSensor;
     private SensorEventListener lightEventListener;
     private float maxValue;
     private float lightQuantity;
-    TextView luxText;
-
+    private TextView luxText;
+    private TextView pressureText;
+    private TextView humidityText;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -40,7 +40,10 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLightSensor = new appLightSensor(view);
+        mBarometerSensor = new AppBarometerSensor(view);
         luxText = view.findViewById(R.id.Lux_Measurement);
+        pressureText = view.findViewById(R.id.pressureSensorView);
+        humidityText = view.findViewById(R.id.Humidity_Text);
 
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +58,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                     luxText.setText(" This is the current lux " + mLightSensor.getLux());
+                    pressureText.setText("This is the current pressure " + mBarometerSensor.getPressure());
+                    humidityText.setText("This is the current humidity " + mBarometerSensor.getHumidity());
 
 
 

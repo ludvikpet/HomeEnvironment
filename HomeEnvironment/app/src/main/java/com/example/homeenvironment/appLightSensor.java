@@ -16,14 +16,13 @@ public class appLightSensor {
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
-    private float maxValue;
     private float lightQuantity;
     private View view;
     TextView luxText;
 
     public appLightSensor(View view){
-        sensorManager = (SensorManager) view.getContext().getSystemService(SENSOR_SERVICE);
         this.view = view;
+        sensorManager = (SensorManager) view.getContext().getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(TYPE_LIGHT);
         luxText = (TextView) view.findViewById(R.id.Lux_Measurement);
 
@@ -39,7 +38,7 @@ public class appLightSensor {
 
             }
         };
-        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_UI);
     }
     public float getLux(){
         if(lightSensor == null) Toast.makeText(view.getContext(), "This phone doesn't have a lightsensor", Toast.LENGTH_SHORT).show();
