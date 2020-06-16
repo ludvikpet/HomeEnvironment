@@ -4,22 +4,20 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.content.Context.SENSOR_SERVICE;
 import static android.hardware.Sensor.TYPE_LIGHT;
 
-public class appLightSensor {
+public class AppLightSensor {
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
     private float lightQuantity;
     private View view;
 
-    public appLightSensor(View view){
+    public AppLightSensor(View view){
         this.view = view;
         sensorManager = (SensorManager) view.getContext().getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(TYPE_LIGHT);
