@@ -50,7 +50,7 @@ public class NoiseLevel extends AppCompatActivity {
                     while (runner != null) {
                         try {
                             Thread.sleep(600);
-                            Log.i(TAG, "Current noise: " + (float) soundDb(10 * Math.exp(-3)));
+//                            Log.i(TAG, "Current noise: " + (float) soundDb(10 * Math.exp(-3)));
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -123,6 +123,7 @@ public class NoiseLevel extends AppCompatActivity {
 
     }
 
+
     public double getAmplitudeEMA() {
         double amp = getAmplitude();
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
@@ -130,5 +131,9 @@ public class NoiseLevel extends AppCompatActivity {
     }
     public float getNoiseLevel(){
         return (float) soundDb(10 * Math.exp(-3));
+    }
+
+    public void stopThread(){
+        runner.interrupt();
     }
 }
