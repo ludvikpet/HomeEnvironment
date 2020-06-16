@@ -1,16 +1,21 @@
 package com.example.homeenvironment;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-public class FirstFragment extends Fragment {
+import java.util.Objects;
 
+public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -30,11 +35,12 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
+
         view.findViewById(R.id.button_noiselevel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_Noiselevel);
+                    NavHostFragment.findNavController(FirstFragment.this)
+                            .navigate(R.id.action_FirstFragment_to_Noiselevel);
             }
         });
     }

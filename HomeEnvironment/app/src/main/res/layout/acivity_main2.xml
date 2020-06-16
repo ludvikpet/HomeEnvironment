@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SoundMeter">
+    tools:context=".NoiseLevel">
 
 
     <TextView
         android:id="@+id/noiselevel"
-        android:layout_width="77dp"
-        android:layout_height="20dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/noise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
