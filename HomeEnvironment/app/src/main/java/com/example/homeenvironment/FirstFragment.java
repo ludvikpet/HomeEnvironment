@@ -45,7 +45,7 @@ public class FirstFragment extends Fragment {
         pressureText = view.findViewById(R.id.pressureSensorView);
         humidityText = view.findViewById(R.id.Humidity_Text);
         temperatureText = view.findViewById(R.id.Temperature_Text);
-
+        final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
         view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +62,7 @@ public class FirstFragment extends Fragment {
                     pressureText.setText("This is the current pressure " + mBarometerSensor.getPressure());
                     humidityText.setText("This is the current humidity " + mBarometerSensor.getHumidity());
                     temperatureText.setText("This is the current temperature " + mTemperatureSensor.getTemperature());
-
+                    alarmCreateActivity.setRepeating();
 
             }
         });
