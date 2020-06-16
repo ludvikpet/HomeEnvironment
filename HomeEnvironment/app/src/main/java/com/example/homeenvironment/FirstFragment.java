@@ -1,5 +1,8 @@
 package com.example.homeenvironment;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
-import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
+import com.example.homeenvironment.Sensors.AppTemperatureSensor;
+import com.example.homeenvironment.Sensors.NoiseLevel;
 
 public class FirstFragment extends Fragment {
     private AppLightSensor mLightSensor;
@@ -22,10 +27,8 @@ public class FirstFragment extends Fragment {
     private SensorEventListener lightEventListener;
     private float maxValue;
     private float lightQuantity;
-    private TextView luxText;
-    private TextView pressureText;
-    private TextView humidityText;
-    private TextView temperatureText;
+    private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
+    private NoiseLevel noiseLevel;
 
     @Override
     public View onCreateView(
@@ -50,6 +53,10 @@ public class FirstFragment extends Fragment {
         humidityText = view.findViewById(R.id.humidityID);
         temperatureText = view.findViewById(R.id.temperatureID);
         final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
+        noiseLevelText = view.findViewById(R.id.noiseID);
+        noiseLevel = new NoiseLevel(view);
+        setInfo();
+
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +66,31 @@ public class FirstFragment extends Fragment {
             }
         });
 
+//        view.findViewById(R.id.button_noiselevel).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                    NavHostFragment.findNavController(FirstFragment.this)
+//                            .navigate(R.id.action_FirstFragment_to_Noiselevel);
 
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
+                    pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
+                    humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
+                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                    noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                     alarmCreateActivity.setRepeating();
-                    luxText.setText("" + mLightSensor.getLux());
-                    pressureText.setText("" + mBarometerSensor.getPressure());
-                    humidityText.setText("" + mBarometerSensor.getHumidity());
-                    temperatureText.setText("" + mTemperatureSensor.getTemperature());
-
-
             }
         });
     }
+
+    private void setInfo(){
+        luxText.setText(getString(R.string.lightLevelInfo,0));
+        pressureText.setText(getString(R.string.pressureInfo, 0));
+        humidityText.setText(getString(R.string.humidityInfo, 0));
+        temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
+        noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
+    }
+
 }
