@@ -7,10 +7,10 @@
     tools:context=".FirstFragment">
 
     <TextView
-        android:id="@+id/textview_first"
+        android:id="@+id/Lux_Measurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
+        android:text="This is for measuring light"
         app:layout_constraintBottom_toTopOf="@id/button_first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,5 +24,46 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+        app:layout_constraintTop_toBottomOf="@id/Lux_Measurement" />
+
+    <Button
+        android:id="@+id/MeasuringLightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="forMeasuringLight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_first"
+        app:layout_constraintVertical_bias="0.706" />
+
+    <TextView
+        android:id="@+id/pressureSensorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+
+
+        android:text="This is for measuring pressure!"
+        app:layout_constraintTop_toBottomOf="@id/Lux_Measurement"
+        tools:layout_editor_absoluteX="125dp" />
+
+    <TextView
+        android:id="@+id/Humidity_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is for measuring humidity!"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="286dp" />
+
+    <TextView
+        android:id="@+id/Temperature_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is for measuring temperature!"
+        app:layout_constraintTop_toBottomOf="@id/Humidity_Text"
+        android:gravity="center"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
