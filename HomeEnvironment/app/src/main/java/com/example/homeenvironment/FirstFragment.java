@@ -1,7 +1,6 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -19,7 +17,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
-import com.example.homeenvironment.Sensors.NoiseLevel;
 
 public class FirstFragment extends Fragment {
     private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
@@ -94,8 +91,8 @@ public class FirstFragment extends Fragment {
                 } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                     alarmCreateActivity.setRepeating();
+                }
             }
-        }
         });
     }
 

@@ -1,4 +1,4 @@
-package com.example.homeenvironment.Sensors;
+package com.example.homeenvironment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -35,9 +35,9 @@ public class NoiseLevel extends AppCompatActivity {
     };
 
 
-//    public void onCreate(Bundle savedInstanceState) {
+    //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-    public NoiseLevel(View view){
+    public NoiseLevel(View view) {
         this.view = view;
         Log.i(TAG, "CREATION");
 //        setContentView(R.layout.fragment_first);
@@ -129,11 +129,12 @@ public class NoiseLevel extends AppCompatActivity {
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
         return mEMA;
     }
-    public float getNoiseLevel(){
+
+    public float getNoiseLevel() {
         return (float) soundDb(10 * Math.exp(-3));
     }
 
-    public void stopThread(){
+    public void stopThread() {
         runner.interrupt();
     }
 }
