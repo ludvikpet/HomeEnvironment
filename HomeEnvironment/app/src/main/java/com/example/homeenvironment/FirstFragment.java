@@ -16,9 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
+import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
-import com.example.homeenvironment.Sensors.appLightSensor;
 
 public class FirstFragment extends Fragment {
     private AppLightSensor mLightSensor;
