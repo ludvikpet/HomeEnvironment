@@ -2,6 +2,7 @@ package com.example.homeenvironment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -9,10 +10,13 @@ import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.homeenvironment.Sensors.AppTemperatureSensor;
+
 public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
     public static SwitchPreference notificationsPref;
+    public boolean fahrenheit;
 
     private final static String TAG = "Settings";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -30,6 +34,7 @@ public class Settings extends PreferenceActivity {
 
     public static class MyPreferenceFragment extends PreferenceFragment {
 
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -43,13 +48,10 @@ public class Settings extends PreferenceActivity {
                     //Temp switch
 
                     if (tempPref.isChecked()) {
-                        Toast.makeText(getView().getContext(), "That worked! it's on!", Toast.LENGTH_SHORT);
+                        AppTemperatureSensor.fahrenheit = false;
                         tempPref.setChecked(false);
-
-                        Log.i(TAG, "that's OFF");
                     } else if (!tempPref.isChecked()) {
-                        Log.i(TAG, "That's ON");
-                        Toast.makeText(getView().getContext(), "That worked! it's off!", Toast.LENGTH_SHORT);
+                        AppTemperatureSensor.fahrenheit = true;
                         tempPref.setChecked(true);
                     }
 
@@ -63,12 +65,10 @@ public class Settings extends PreferenceActivity {
                 public boolean onPreferenceChange(Preference preference, Object o) {
 
                     if (notificationsPref.isChecked()) {
-                        Toast.makeText(getView().getContext(), "That worked! it's on!", Toast.LENGTH_SHORT);
+
                         notificationsPref.setChecked(false);
-                        Log.i(TAG, "that's OFF");
+
                     } else if (!notificationsPref.isChecked()) {
-                        Log.i(TAG, "That's ON");
-                        Toast.makeText(getView().getContext(), "That worked! it's off!", Toast.LENGTH_SHORT);
                         notificationsPref.setChecked(true);
                     }
                     return false;
