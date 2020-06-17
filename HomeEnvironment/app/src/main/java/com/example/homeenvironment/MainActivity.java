@@ -2,6 +2,7 @@ package com.example.homeenvironment;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import androidx.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
