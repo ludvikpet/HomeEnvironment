@@ -1,5 +1,6 @@
 package com.example.homeenvironment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -46,7 +48,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // Log receipt of the Intent with timestamp
         Log.i(TAG,DateFormat.getDateTimeInstance().format(new Date()));
-        Toast.makeText(context,"hello!!!!!!!!!",Toast.LENGTH_LONG).show();
 // The Intent to be used when the user clicks on the Notification View
         notificationIntent = new Intent(context, MainActivity.class);
 
@@ -58,7 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Build the Notification
         Notification.Builder notificationBuilder = new Notification.Builder(
                 context).setTicker(tickerText)
-                .setSmallIcon(android.R.drawable.stat_sys_warning)
+                .setSmallIcon(R.drawable.ic_stat_name,5)
                 .setAutoCancel(true).setContentTitle(contentTitle)
                 .setContentText(contentText).setContentIntent(contentIntent)
                 .setSound(uri).setVibrate(vibratePattern);
