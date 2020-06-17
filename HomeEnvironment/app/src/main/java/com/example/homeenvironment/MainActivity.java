@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
+
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
-        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"30 min");
+        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"Halv time");
         //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
         //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 
@@ -70,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings: {
+                startActivity(new Intent(MainActivity.this, Settings.class));
+
+            }
         }
 
         return super.onOptionsItemSelected(item);
