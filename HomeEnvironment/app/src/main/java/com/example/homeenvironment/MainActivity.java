@@ -48,7 +48,7 @@ import android.widget.ImageView;
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"halv time");
         Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
-        //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
+        Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
