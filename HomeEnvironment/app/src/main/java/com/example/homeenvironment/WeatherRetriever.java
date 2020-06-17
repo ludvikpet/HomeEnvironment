@@ -39,6 +39,8 @@ public class WeatherRetriever {
     String cityName;
     String country;
     CityListener cityListener;
+    String temperature;
+    String humidity;
 
     //Første string er URL som string, sidste string er return typen.
     class Weather extends AsyncTask<String, Void, String> {
@@ -120,21 +122,15 @@ public class WeatherRetriever {
     }
 
 
-    public String getHumidity() throws JSONException {
-        //JSON herfra for at importere dataen til noget brugbart.
-        JSONObject json = new JSONObject(content);
-        JSONObject jsonMain = new JSONObject(json.getString("main"));
-        Log.i("WeatherRetriever", "Humidity! -> "+jsonMain.getString("humidity"));
-        return jsonMain.getString("humidity");
+    public String getHumidity()  {
+        Log.i("WeatherRetriever", "This is the humidity " + humidity);
+        return humidity;
     }
 
 
-    public String getTemperature() throws JSONException {
-        //JSON herfra for at importere dataen til noget brugbart.
-        JSONObject json = new JSONObject(content);
-        JSONObject jsonMain = new JSONObject(json.getString("main"));
-        Log.i("WeatherRetriever", "Temperature! -> "+jsonMain.getString("Temperature!"));
-        return jsonMain.getString("temp");
+    public String getTemperature()  {
+        Log.i("WeatherRetriever", "This is the temperature " + temperature);
+        return temperature;
     }
 
     public void setWeather(View view) {
@@ -161,9 +157,15 @@ public class WeatherRetriever {
 
                 //Log.i("WeatherRetriever", "final city name: "+cityName);
                 content = weather.execute("https://openweathermap.org/data/2.5/weather?q="+cityName+"&appid=439d4b804bc8187953eb36d2a8c26a02").get();
+                JSONObject json = new JSONObject(content);
+                JSONObject jsonMain = new JSONObject(json.getString("main"));
+                temperature = jsonMain.getString("temp");
+                humidity = jsonMain.getString("humidity");
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }

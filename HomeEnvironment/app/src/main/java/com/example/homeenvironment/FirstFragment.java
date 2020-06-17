@@ -56,6 +56,7 @@ public class FirstFragment extends Fragment {
         noiseLevelText = view.findViewById(R.id.noiseID);
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
+        weatherRetriever.getHumidity();
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
            // noiseLevel.startRecorder();
