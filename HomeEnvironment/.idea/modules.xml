@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidAppDevelopment-ApplicationProject-HomeEnvironment-HomeEnvironment.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidAppDevelopment-ApplicationProject-HomeEnvironment-HomeEnvironment.iml" group="HomeEnvironment" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApplicationProject-HomeEnvironment-HomeEnvironment.iml" filepath="$PROJECT_DIR$/.idea/modules/ApplicationProject-HomeEnvironment-HomeEnvironment.iml" group="HomeEnvironment" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ApplicationProject-HomeEnvironment-HomeEnvironment-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ApplicationProject-HomeEnvironment-HomeEnvironment-app.iml" group="HomeEnvironment/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/HomeEnvironment.iml" filepath="$PROJECT_DIR$/.idea/modules/HomeEnvironment.iml" group="HomeEnvironment" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/HomeEnvironment-HomeEnvironment.iml" filepath="$PROJECT_DIR$/.idea/modules/HomeEnvironment-HomeEnvironment.iml" group="HomeEnvironment" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/HomeEnvironment-HomeEnvironment-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/HomeEnvironment-HomeEnvironment-app.iml" group="HomeEnvironment/app" />
