@@ -7,8 +7,16 @@
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="test"
-            android:title="Test" />
+            android:key="notifications"
+            android:summaryOff="Notifications turned off"
+            android:summaryOn="Notifications turned on"
+            android:title="Notifications" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="temperature"
+            android:summaryOff="Celsius"
+            android:summaryOn="Fahrenheit"
+            android:title="Temperature unit" />
 
 
         <ListPreference
