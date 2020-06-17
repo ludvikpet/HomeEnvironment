@@ -23,7 +23,7 @@ import java.util.Date;
 public class AlarmReceiver extends BroadcastReceiver {
 
 
-    private static final String TAG = "AlarmReceiver";
+    private static final String TAG = "Alarm";
     // Notification ID to allow for future updates
     private static final int NOTIFICATION_ID = 1;
 
@@ -59,7 +59,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Build the Notification
         Notification.Builder notificationBuilder = new Notification.Builder(
                 context).setTicker(tickerText)
+<<<<<<< Updated upstream
                 .setSmallIcon(R.drawable.ic_stat_name,5)
+=======
+                .setSmallIcon(R.drawable.ic_stat_name)
+>>>>>>> Stashed changes
                 .setAutoCancel(true).setContentTitle(contentTitle)
                 .setContentText(contentText).setContentIntent(contentIntent)
                 .setSound(uri).setVibrate(vibratePattern);
@@ -73,7 +77,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notificationBuilder.build());
 
         // Log occurence of notify() call
-        Log.i(TAG, "Sending notification at:"
+        Log.i(TAG, "AlarmReceiver her! has Received Alarm:"
                 + DateFormat.getDateTimeInstance().format(new Date()));
 
     }

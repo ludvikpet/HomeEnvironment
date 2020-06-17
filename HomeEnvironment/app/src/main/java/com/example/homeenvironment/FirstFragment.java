@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +91,10 @@ public class FirstFragment extends Fragment {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-                    alarmCreateActivity.setRepeating();
+
                 }
+                Log.i("Alarm","FirstFragment her! Setting Repeating" );
+                alarmCreateActivity.setRepeating();
             }
         });
     }
