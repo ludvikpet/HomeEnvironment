@@ -35,14 +35,8 @@
     <string name="notifications" />
     <string name="temperature" />
 
-<<<<<<< Updated upstream
-    </resources>
-=======
     <!-- Boolean values -->
-
     <string name="tempBoolean" />
     <string name="notiBoolean" />
 
-
     </resources>
->>>>>>> Stashed changes

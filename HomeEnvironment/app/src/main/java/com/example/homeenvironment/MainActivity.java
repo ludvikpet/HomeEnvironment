@@ -9,8 +9,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 
+
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -32,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"30 min");
-        //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
-        //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
