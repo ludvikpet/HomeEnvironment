@@ -7,17 +7,16 @@
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="@string/key_notification"
+            android:key="notifications"
             android:summaryOff="Notifications turned off"
             android:summaryOn="Notifications turned on"
             android:title="Notifications" />
         <SwitchPreference
             android:defaultValue="false"
-            android:key="@string/key_temperature"
+            android:key="temperature"
             android:summaryOff="Celsius"
             android:summaryOn="Fahrenheit"
             android:title="Temperature unit" />
-
 
         <ListPreference
             android:entries="@array/reply_entries"
@@ -26,7 +25,8 @@
             android:entryValues="@array/reply_values"
             android:key="@string/key_reminder"
             android:title="Reminder Alert"
-            android:useSimpleSummaryProvider="true" />
+            />
+
 
     </PreferenceCategory>
 

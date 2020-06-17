@@ -32,6 +32,7 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="key_reminder" />
-    <string name="key_notification" />
-    <string name="key_temperature" />
+    <string name="notifications" />
+    <string name="temperature" />
+
     </resources>

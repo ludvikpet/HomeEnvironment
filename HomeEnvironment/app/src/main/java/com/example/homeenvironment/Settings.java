@@ -9,11 +9,6 @@ import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-
 public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;

@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"30 min");
-        Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
-        Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
+        //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
+        //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
