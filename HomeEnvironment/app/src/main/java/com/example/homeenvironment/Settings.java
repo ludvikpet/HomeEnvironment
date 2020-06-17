@@ -45,7 +45,7 @@ public class Settings extends PreferenceActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
                     //Temp switch
-
+                    String notification_bool = getString(R.string.notification_Boolean);
                     if (tempPref.isChecked()) {
                         tempPref.setChecked(false);
                         AppTemperatureSensor.fahrenheit = false;
@@ -61,12 +61,13 @@ public class Settings extends PreferenceActivity {
             notificationsPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-
+                    String notification_bool = getString(R.string.notification_Boolean);
                     if (notificationsPref.isChecked()) {
-
+                        notification_bool = "false";
                         notificationsPref.setChecked(false);
 
                     } else if (!notificationsPref.isChecked()) {
+                        notification_bool = "true";
                         notificationsPref.setChecked(true);
                     }
                     return false;
