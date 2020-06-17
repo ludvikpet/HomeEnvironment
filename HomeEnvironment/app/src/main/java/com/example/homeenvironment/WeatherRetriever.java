@@ -124,7 +124,7 @@ public class WeatherRetriever {
         //JSON herfra for at importere dataen til noget brugbart.
         JSONObject json = new JSONObject(content);
         JSONObject jsonMain = new JSONObject(json.getString("main"));
-        Log.i("WeatherRetriever", jsonMain.getString("humidity"));
+        Log.i("WeatherRetriever", "Humidity! -> "+jsonMain.getString("humidity"));
         return jsonMain.getString("humidity");
     }
 
@@ -133,7 +133,7 @@ public class WeatherRetriever {
         //JSON herfra for at importere dataen til noget brugbart.
         JSONObject json = new JSONObject(content);
         JSONObject jsonMain = new JSONObject(json.getString("main"));
-        Log.i("WeatherRetriever", jsonMain.getString("humidity"));
+        Log.i("WeatherRetriever", "Temperature! -> "+jsonMain.getString("Temperature!"));
         return jsonMain.getString("temp");
     }
 
