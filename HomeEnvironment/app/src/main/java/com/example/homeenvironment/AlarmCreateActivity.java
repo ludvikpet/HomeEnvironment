@@ -20,8 +20,9 @@ public class AlarmCreateActivity {
     }
 
     public void setRepeating(){
-       
-
+       if(alarmManager != null){
+           alarmManager.cancel(receiverPendingIntent);
+       }
         alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),50000,receiverPendingIntent);
     }
