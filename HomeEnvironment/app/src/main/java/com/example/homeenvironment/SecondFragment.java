@@ -27,11 +27,13 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.button_temperature_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_TipTextScreen);
+                //NavHostFragment.findNavController(SecondFragment.this)
+                  //      .navigate(R.id.action_SecondFragment_to_TipTextScreen);
+
+                startActivity(new Intent(getActivity(), TipTextScreen.class));
             }
         });
 
