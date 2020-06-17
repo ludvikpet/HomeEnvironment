@@ -15,7 +15,7 @@
         <activity android:name=".NoiseLevel" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,9 +26,17 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings">
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <receiver android:name=".AlarmReceiver" />
     </application>
