@@ -2,6 +2,7 @@ package com.example.homeenvironment;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import androidx.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -31,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Log.i("onCreate", "hej");
 
+
+        //Gem information fra settings.
+        SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
+        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"30 min");
+        //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
+        //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
