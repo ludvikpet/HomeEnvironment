@@ -45,7 +45,7 @@ public class AppTemperatureSensor {
             return (float) (temperature * 1.8 + 32);
         }
         else{
-            return temperature;
+            return (temperature-32) * 5/9;
         }
 
     }

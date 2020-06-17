@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
-        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"Halv time");
+        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"halv time");
         //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
         //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
 

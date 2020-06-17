@@ -16,7 +16,6 @@ public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
     public static SwitchPreference notificationsPref;
-    public boolean fahrenheit;
 
     private final static String TAG = "Settings";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -48,13 +47,12 @@ public class Settings extends PreferenceActivity {
                     //Temp switch
 
                     if (tempPref.isChecked()) {
-                        AppTemperatureSensor.fahrenheit = false;
                         tempPref.setChecked(false);
-                    } else if (!tempPref.isChecked()) {
-                        AppTemperatureSensor.fahrenheit = true;
+                        AppTemperatureSensor.fahrenheit = false;
+                    } else {
                         tempPref.setChecked(true);
+                        AppTemperatureSensor.fahrenheit = true;
                     }
-
                     return false;
                 }
             });
