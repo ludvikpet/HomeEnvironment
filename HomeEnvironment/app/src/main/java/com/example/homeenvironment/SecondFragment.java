@@ -1,5 +1,6 @@
 package com.example.homeenvironment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SecondFragment extends Fragment {
-
-    private long tipID;
-
-    public void setTipID(long tipID){
-        this.tipID = tipID;
-    }
 
     @Override
     public View onCreateView(
@@ -32,14 +27,49 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        view.findViewById(R.id.button_temperature_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "temp");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_pressure_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "pressure");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_light_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "light");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_humidity_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "humidity");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_noise_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "noise");
+                startActivity(popUp);
+            }
+        });
+
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        View view = getView();
-        if(view != null){
 
-        }
-    }
 }

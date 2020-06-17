@@ -1,8 +1,12 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.gesture.GestureOverlayView;
+import android.gesture.Prediction;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,12 +17,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.DragEvent;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
@@ -27,11 +38,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Log.i("onCreate", "hej");
 
 
+        //Gem information fra settings.
+        SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
+        String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"halv time");
+        //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
+        //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +87,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings: {
+                startActivity(new Intent(MainActivity.this, Settings.class));
+
+            }
         }
 
         return super.onOptionsItemSelected(item);
