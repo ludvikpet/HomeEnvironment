@@ -38,6 +38,10 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+        <activity android:name=".TipTextScreen"
+            android:theme="@style/AppTheme.CustomTheme"
+
+        ></activity>
         <receiver android:name=".AlarmReceiver" />
     </application>
 

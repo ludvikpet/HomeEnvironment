@@ -5,5 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="tip_pop_up">#A9E4F3</color>
+    <color name="tip_pop_up_boarder">#89B3F3</color>
 
 </resources>
