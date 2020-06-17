@@ -35,6 +35,38 @@ public class SecondFragment extends Fragment {
                 startActivity(popUp);
             }
         });
+        view.findViewById(R.id.button_pressure_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "pressure");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_light_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "light");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_humidity_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "humidity");
+                startActivity(popUp);
+            }
+        });
+        view.findViewById(R.id.button_noise_tip).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("tipType", "noise");
+                startActivity(popUp);
+            }
+        });
 
 
     }

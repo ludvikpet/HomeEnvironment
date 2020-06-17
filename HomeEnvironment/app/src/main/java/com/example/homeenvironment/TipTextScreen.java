@@ -3,6 +3,7 @@ package com.example.homeenvironment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ public class TipTextScreen extends Activity {
     private String pressureTip = "The ideal level of pressure in an area fit for office work is around 985 Pa. If your area consistently has lower pressure, you might want to consider moving to a lower altitude when you work.";
     private String lightTip = "The ideal light level for your working space should be around 320-500 lx. Is it much brighter, consider rolling down some blinds or going to a more shaded area. Is it darker, turn on some lights or ideally you can get some sunlight by opening up your blinds.";
     private String humidityTip = "Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level.";
-    private String noiseTip = "The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently";
+    private String noiseTip = "The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently higher than 60 dB, consider moving to a quieter workspace or ask the people around you to quiet down.";
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -35,9 +36,6 @@ public class TipTextScreen extends Activity {
 
         getWindow().setLayout((int) (width * .8), (int) (heigt * .6));
 
-        ConstraintLayout l1 = (ConstraintLayout) findViewById(id.tiptextscreen_layout);
-            l1.setBackgroundColor(R.color.tip_pop_up);
-
         TextView tipText = (TextView) findViewById(id.textview_the_tip);
         if(tipText != null){
             Intent intent = getIntent();
@@ -46,13 +44,13 @@ public class TipTextScreen extends Activity {
             if(type.equals("temp")) {
                 tipText.setText(tempTip);
             } else if(type.equals("pressure")){
-
+                tipText.setText(pressureTip);
             } else if(type.equals("light")){
-
+                tipText.setText(lightTip);
             } else if(type.equals("humidity")){
-
+                tipText.setText(humidityTip);
             } else if(type.equals("noise")) {
-
+                tipText.setText(noiseTip);
             }
             }
 
