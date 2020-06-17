@@ -28,6 +28,16 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/TipTextScreen"
+        android:name="com.example.homeenvironment.TipTextScreen"
+        android:label="@string/TipTextScreen_label"
+        tools:layout="@layout/activity_tiptextscreen">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_TipTextScreen"
+            app:destination="@id/TipTextScreen" />
+    </fragment>
     <activity
         android:id="@+id/soundMeter"
         android:name="com.example.homeenvironment.Sensors.NoiseLevel"

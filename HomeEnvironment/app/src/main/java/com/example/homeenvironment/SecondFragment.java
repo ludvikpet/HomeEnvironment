@@ -1,5 +1,6 @@
 package com.example.homeenvironment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SecondFragment extends Fragment {
-
-    private long tipID;
-
-    public void setTipID(long tipID){
-        this.tipID = tipID;
-    }
 
     @Override
     public View onCreateView(
@@ -32,14 +27,16 @@ public class SecondFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_TipTextScreen);
+            }
+        });
+
+
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        View view = getView();
-        if(view != null){
 
-        }
-    }
 }
