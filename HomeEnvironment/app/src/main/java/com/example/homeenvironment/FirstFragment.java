@@ -2,7 +2,9 @@ package com.example.homeenvironment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
+
+import static android.content.Context.SENSOR_SERVICE;
+import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
 
 public class FirstFragment extends Fragment {
     private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
@@ -88,12 +93,12 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
-                humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
+                humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
                 if(AppTemperatureSensor.fahrenheit) {
-                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "F"));
+                    temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 }
                 else {
-                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                    temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "℃"));
                 }
                 if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
@@ -104,12 +109,21 @@ public class FirstFragment extends Fragment {
             }
         });
     }
+    private Float getTemperature(){
 
+        Float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
+        temp = (mTemperatureSensor.fahrenheit) ?  (temp * 9/5 + 32) : (temp-32) * 5/9;
+        return temp;
+    }
+    private int getHumidity(){
+        int humidity = (mBarometerSensor.hasHumiditySensor()) ? mBarometerSensor.getHumidity() : weatherRetriever.getHumidity();
+        return humidity;
+    }
     private void setInfo() {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(AppTemperatureSensor.fahrenheit == true){
+        if(mTemperatureSensor.fahrenheit == true){
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
         }
         else{

@@ -122,9 +122,9 @@ public class WeatherRetriever {
     }
 
 
-    public String getHumidity()  {
+    public int getHumidity()  {
         Log.i("WeatherRetriever", "This is the humidity " + humidity);
-        return humidity;
+        return Integer.parseInt(humidity);
     }
 
 
