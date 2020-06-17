@@ -28,6 +28,7 @@ public class FirstFragment extends Fragment {
     private float lightQuantity;
     private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
     private NoiseLevel noiseLevel;
+    private WeatherRetriever weatherRetriever;
 
     @Override
     public View onCreateView(
@@ -53,6 +54,8 @@ public class FirstFragment extends Fragment {
         temperatureText = view.findViewById(R.id.temperatureID);
         final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
         noiseLevelText = view.findViewById(R.id.noiseID);
+        weatherRetriever = new WeatherRetriever(view);
+        weatherRetriever.setWeather(view);
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
             noiseLevel.startRecorder();
@@ -90,8 +93,8 @@ public class FirstFragment extends Fragment {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-                    alarmCreateActivity.setRepeating();
                 }
+                alarmCreateActivity.setRepeating();
             }
         });
     }
