@@ -48,7 +48,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.i(TAG,DateFormat.getDateTimeInstance().format(new Date()));
         Toast.makeText(context,"hello!!!!!!!!!",Toast.LENGTH_LONG).show();
 // The Intent to be used when the user clicks on the Notification View
-        notificationIntent = new Intent(context, FirstFragment.class);
+        notificationIntent = new Intent(context, MainActivity.class);
 
         // The PendingIntent that wraps the underlying Intent
         contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
