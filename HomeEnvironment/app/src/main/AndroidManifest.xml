@@ -30,6 +30,7 @@
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings">
+        </activity>
 
         <activity
             android:name=".MainActivity"

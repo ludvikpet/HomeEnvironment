@@ -49,15 +49,6 @@ import android.widget.ImageView;
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"Halv time");
         //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
         //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Log.i("Tjek", "hej from main");
-
             FloatingActionButton fab = findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,7 +96,3 @@ import android.widget.ImageView;
         return super.onOptionsItemSelected(item);
     }
 }
-            return super.onOptionsItemSelected(item);
-        }
-
-    }
