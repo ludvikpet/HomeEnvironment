@@ -21,30 +21,10 @@
     <string name="noiseText">Noise Level</string>
     <string name="humidityText">Humidity</string>
     <string name="pressureText">Pressure</string>
-    <string name="title_activity_settings">Settings</string>
-
+    <!--    Strings used for information-->
     <string name="tempInfo">%1$.1f %2$s</string>
     <string name="lightLevelInfo">%1$d Lux</string>
     <string name="noiseInfo">%1$.2f dB</string>
     <string name="humidityInfo">%1$d %%</string>
     <string name="pressureInfo">%1$d Pa</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="key_reminder" />
-    <string name="notifications" />
-    <string name="temperature" />
-
-    </resources>
+</resources>
