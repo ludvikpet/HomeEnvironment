@@ -49,7 +49,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Log receipt of the Intent with timestamp
         Log.i(TAG,DateFormat.getDateTimeInstance().format(new Date()));
 // The Intent to be used when the user clicks on the Notification View
-        notificationIntent = new Intent(context, MainActivity.class);
+        notificationIntent = new Intent(context, HomeActivity.class);
 
         // The PendingIntent that wraps the underlying Intent
         contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -59,11 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Build the Notification
         Notification.Builder notificationBuilder = new Notification.Builder(
                 context).setTicker(tickerText)
-<<<<<<< Updated upstream
-                .setSmallIcon(R.drawable.ic_stat_name,5)
-=======
                 .setSmallIcon(R.drawable.ic_stat_name)
->>>>>>> Stashed changes
                 .setAutoCancel(true).setContentTitle(contentTitle)
                 .setContentText(contentText).setContentIntent(contentIntent)
                 .setSound(uri).setVibrate(vibratePattern);
