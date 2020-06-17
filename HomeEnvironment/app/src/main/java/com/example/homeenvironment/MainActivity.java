@@ -47,18 +47,10 @@ import android.widget.ImageView;
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"halv time");
-        //Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
+        Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
         //Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
-            FloatingActionButton fab = findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    Log.i("Tjek", "hej from main");
 
-                }
-            });
+
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, MY_PERMISSIONS_RECORD_AUDIO);
             }
