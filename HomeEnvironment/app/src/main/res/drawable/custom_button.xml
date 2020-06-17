@@ -73,10 +73,10 @@
         <shape>
             <solid android:color="@color/colorPrimary" />
             <padding
-                android:bottom="2sp"
+                android:bottom="4sp"
                 android:left="4sp"
                 android:right="4sp"
-                android:top="2dp" />
+                android:top="4sp" />
             <corners android:radius="5sp" />
         </shape>
     </item>
