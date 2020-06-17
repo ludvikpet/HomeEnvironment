@@ -97,13 +97,20 @@ public class FirstFragment extends Fragment {
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
-                temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                if(AppTemperatureSensor.fahrenheit) {
+                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "F"));
+                }
+                else {
+                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                }
                 if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-                    alarmCreateActivity.setRepeating();
+
                 }
+                Log.i("Alarm","FirstFragment her! Setting Repeating" );
+                alarmCreateActivity.setRepeating();
             }
         });
     }
@@ -113,7 +120,12 @@ public class FirstFragment extends Fragment {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
+        if(AppTemperatureSensor.fahrenheit == true){
+            temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
+        }
+        else{
+            temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
+        }
         noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
     }
 

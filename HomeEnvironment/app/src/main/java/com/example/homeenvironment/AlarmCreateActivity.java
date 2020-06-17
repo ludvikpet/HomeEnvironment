@@ -20,9 +20,14 @@ public class AlarmCreateActivity {
     }
 
     public void setRepeating(){
-        Log.i("Tjek", "setRepeating");
+
+        if(alarmManager != null){
+            alarmManager.cancel(receiverPendingIntent);
+            Log.i("Alarm", "AlarmCreateActivity her! has cancel alarm ");
+        }
 
         alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),50000,receiverPendingIntent);
+        Log.i("Alarm", "AlarmCreateActivity her! has set repeating ");
     }
 }
