@@ -38,6 +38,7 @@ public class WeatherRetriever {
     CityListener cityListener;
     String temperature;
     String humidity;
+    Location location;
 
     //Første string er URL som string, sidste string er return typen.
     class Weather extends AsyncTask<String, Void, String> {
@@ -108,7 +109,7 @@ public class WeatherRetriever {
         Context context = view.getContext();
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         this.cityListener = new CityListener(view);
-        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED) {
+        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED ) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 1, cityListener);
         } else {
             Log.i("WeatherRetriever", "What are you thinking? That's illegal! ");
@@ -133,28 +134,32 @@ public class WeatherRetriever {
     }
 
     public void setWeather(View view) {
-        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(view.getContext(),"That isn't allowed", Toast.LENGTH_LONG);
         }else{
 
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Geocoder gcd = new Geocoder(view.getContext(), Locale.US);
             List<Address> addresses;
             try {
+                if(location != null){
                 addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (addresses.size() > 0) {
                     System.out.println(addresses.get(0).getLocality());
                     this.cityName = addresses.get(0).getLocality();
                     //Log.i("WeatherRetriever", "This is the city's name " + cityName);
                 }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
 
+
+
             Weather weather = new Weather();
             try {
-                /**I tilfælde af at brugeren ikke er i en by, så kan programmet ikke hente dataen omrking brugeren.
+                /*I tilfælde af at brugeren ikke er i en by, så kan programmet ikke hente dataen omrking brugeren.
                  I så fald vil vi afbryde funktionen, for ikke at crash programmet.
                  Problemet kan eventuelt løses ved at finde en anden måde at hente vejdata som ikke er afhængig af byer, men dette er udenfor ekspertise samt tidsbudget.
                 */
@@ -172,7 +177,9 @@ public class WeatherRetriever {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
         }
+
     }
 
 }

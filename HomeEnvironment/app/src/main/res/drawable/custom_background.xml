@@ -3,12 +3,12 @@
     <corners
         android:radius="20dp"/>
     <padding
-        android:left="10dp"
-        android:right="10dp"
-        android:top="10dp"
-        android:bottom="10dp"/>
+        android:left="8dp"
+        android:right="8dp"
+        android:top="1dp"
+        android:bottom="1dp"/>
     <stroke
         android:width="5dp"
         android:color="@color/tip_pop_up_boarder"/>
-    <solid android:color="@color/tip_pop_up"/>
+    <solid android:color="@color/colorPrimary"/>
 </shape>
