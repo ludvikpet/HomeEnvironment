@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -37,11 +39,14 @@ import android.widget.ImageView;
 
     public class MainActivity extends AppCompatActivity {
         private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
-
+        FragmentManager fragmentManager;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             setContentView(R.layout.activity_main);
+            fragmentManager = getSupportFragmentManager();
+
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -58,7 +63,6 @@ import android.widget.ImageView;
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, MY_PERMISSIONS_RECORD_AUDIO);
             }
-
         }
 
         @Override
@@ -85,4 +89,5 @@ import android.widget.ImageView;
 
         return super.onOptionsItemSelected(item);
     }
+
 }
