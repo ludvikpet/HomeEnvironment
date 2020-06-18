@@ -53,6 +53,8 @@ public class FirstFragment extends Fragment {
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
+        // TODO Remove/move alarmCreateActivity
+        final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
         luxText = view.findViewById(R.id.lightID);
         pressureText = view.findViewById(R.id.pressureID);
         humidityText = view.findViewById(R.id.humidityID);
@@ -113,7 +115,9 @@ public class FirstFragment extends Fragment {
         });
     }
 
-
+    /**
+     * Sets initial information for the text for the sensors
+     */
     private void setInfo() {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
@@ -126,6 +130,11 @@ public class FirstFragment extends Fragment {
         }
         noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
     }
+
+    /**
+     * Calculates and sets the scale for the view
+     * @param view the view that needs scaling
+     */
 
     private void setScale(View view){
         int width = getResources().getConfiguration().screenWidthDp;
@@ -150,6 +159,17 @@ public class FirstFragment extends Fragment {
         tipsButton.setTextSize(textSize);
         setTitles(luxTitle, pressureTitle, humidityTitle, temperatureTitle, noiseLevelTitle, textSize, calculatedWidth);
     }
+
+    /**
+     * Method to set the scaling on the TextViews
+     * @param luxTitle the title for the light level
+     * @param pressureTitle the title for the pressure
+     * @param humidityTitle the title for humidity
+     * @param temperatureTitle the title for the temperature
+     * @param noiseLevelTitle title for noise level
+     * @param textSize the calculated text size for the TextViews
+     * @param width the calculate width for the TextViews
+     */
     private void setTitles(TextView luxTitle, TextView pressureTitle, TextView humidityTitle, TextView temperatureTitle, TextView noiseLevelTitle, float textSize, int width){
         luxTitle.setTextSize(textSize);
         pressureTitle.setTextSize(textSize);
@@ -162,6 +182,13 @@ public class FirstFragment extends Fragment {
         setDimensions(temperatureText, textSize, width);
         setDimensions(noiseLevelText, textSize, width);
     }
+
+    /**
+     * Method to streamline setting the text size and width of the TextViews
+     * @param textView which TextView that needs to get set
+     * @param textSize calculated text size
+     * @param width calculated width
+     */
     private void setDimensions(TextView textView, float textSize, int width){
         textView.setTextSize(textSize);
         textView.setWidth(width);
