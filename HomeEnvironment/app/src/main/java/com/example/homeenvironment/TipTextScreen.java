@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
 import static com.example.homeenvironment.R.*;
 
 
@@ -23,18 +25,21 @@ public class TipTextScreen extends Activity {
     private String humidityTip = "Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level.";
     private String noiseTip = "The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently higher than 60 dB, consider moving to a quieter workspace or ask the people around you to quiet down.";
 
-    private String tempInfo = "Ideal temperature is 22C/72F";
+    private String tempInfo = "Ideal temperature is 22C/72F ";
     private String pressureInfo = "Ideal pressure is 985 Pa";
     private String lightInfo = "Ideal lux is 320-500 lx";
     private String humidityInfo = "Ideal humidity is 45% - 55%";
     private String noiseInfo = "Ideal noise level is >60 dB";
 
     TextView tipText;
+    String type;
 
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+
 
         setContentView(layout.activity_tiptextscreen);
 
@@ -56,10 +61,10 @@ public class TipTextScreen extends Activity {
         if(tipText != null){
             Intent intent = getIntent();
             String decider = intent.getStringExtra("info/tip");
-            String type = "null";
+
             if(decider.equals("tip")) {
                 type = intent.getStringExtra("tipType");
-                getWindow().setLayout((int) (width * .8), (int) (heigt * .6));
+                getWindow().setLayout((int) (width * .8), (int) (heigt * .5));
                 getTheTip(type);
             } else {
                 type = intent.getStringExtra("infoType");
