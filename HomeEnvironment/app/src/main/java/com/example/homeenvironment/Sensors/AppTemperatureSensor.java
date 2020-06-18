@@ -12,7 +12,7 @@ import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
 import static android.hardware.Sensor.TYPE_LIGHT;
 
 public class AppTemperatureSensor {
-    public static boolean fahrenheit;
+    public static String temperatureMode = "Unchanged";
     private SensorManager sensorManager;
     private Sensor temperatureSensor;
     private SensorEventListener temperatureEventListener;

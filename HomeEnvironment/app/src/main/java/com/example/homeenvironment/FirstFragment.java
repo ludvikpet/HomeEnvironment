@@ -74,7 +74,7 @@ public class FirstFragment extends Fragment {
         weatherRetriever.getHumidity();
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
-            if(!noiseLevel.isRunning()) noiseLevel.startRecorder();
+//            if(!noiseLevel.isRunning()) noiseLevel.startRecorder();
         }
 
         setInfo();
@@ -106,7 +106,7 @@ public class FirstFragment extends Fragment {
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
-                if(AppTemperatureSensor.fahrenheit) {
+                if(AppTemperatureSensor.temperatureMode == "true") {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 }
                 else {
@@ -126,8 +126,15 @@ public class FirstFragment extends Fragment {
     private Float getTemperature(){
 
         Float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
-        temp = (mTemperatureSensor.fahrenheit) ?  (temp * 9/5 + 32) : (temp-32) * 5/9;
-        return temp;
+       if(mTemperatureSensor.temperatureMode == "true"){
+           return (temp * 9/5 + 32);
+       }
+       else if(mTemperatureSensor.temperatureMode == "False"){
+           return (temp-32) * 5/9;
+       }
+       else return
+                   temp;
+
     }
     private int getHumidity(){
         int humidity = (mBarometerSensor.hasHumiditySensor()) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
@@ -137,7 +144,7 @@ public class FirstFragment extends Fragment {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(mTemperatureSensor.fahrenheit == true){
+        if(mTemperatureSensor.temperatureMode == "true"){
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
         } else {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
