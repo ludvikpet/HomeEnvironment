@@ -73,7 +73,7 @@ public class FirstFragment extends Fragment {
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
         weatherRetriever.getHumidity();
-        if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
+        if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
         }
 
@@ -93,13 +93,6 @@ public class FirstFragment extends Fragment {
             }
         });
 
-
-//        view.findViewById(R.id.button_noiselevel).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                    NavHostFragment.findNavController(FirstFragment.this)
-//                            .navigate(R.id.action_FirstFragment_to_Noiselevel);
-
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +100,7 @@ public class FirstFragment extends Fragment {
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
-                if(AppTemperatureSensor.temperatureMode == "true") {
+                if(AppTemperatureSensor.temperatureMode.equals("true")) {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 }
                 else {
@@ -120,7 +113,7 @@ public class FirstFragment extends Fragment {
 
                 }
                 Log.i("Alarm","FirstFragment her! Setting Repeating" );
-                alarmCreateActivity.setRepeating();
+//                alarmCreateActivity.setRepeating();
             }
         });
 
@@ -177,11 +170,11 @@ public class FirstFragment extends Fragment {
     }
     private Float getTemperature(){
 
-        Float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
-       if(mTemperatureSensor.temperatureMode == "true"){
+        float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
+       if(mTemperatureSensor.temperatureMode.equals("true")){
            return (temp * 9/5 + 32);
        }
-       else if(mTemperatureSensor.temperatureMode == "False"){
+       else if(mTemperatureSensor.temperatureMode.equals("False")){
            return (temp-32) * 5/9;
        }
        else return
@@ -189,7 +182,7 @@ public class FirstFragment extends Fragment {
 
     }
     private int getHumidity(){
-        int humidity = ((mBarometerSensor.hasHumiditySensor())) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
+        int humidity = (!(mBarometerSensor.hasHumiditySensor())) ? Integer.parseInt(weatherRetriever.getHumidity()) : mBarometerSensor.getHumidity();
         return humidity;
     }
     private void setInfo() {
