@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-
+import com.example.homeenvironment.MainActivity;
 public class AlarmCreateActivity{
     private static final long REPEAT_INTERVAL =60*1000L ;
     private AlarmManager alarmManager;
@@ -40,6 +40,8 @@ public class AlarmCreateActivity{
             }
         });
     }
+   
+
     private void startAlarmNotification(){
         alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES,receiverPendingIntent);

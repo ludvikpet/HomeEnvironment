@@ -10,6 +10,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -22,11 +23,11 @@ public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
     public static SwitchPreference notificationsPref;
-
+    public static SwitchPreference interval;
+    private String timeInterval;
     private final static String TAG = "Settings";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            // Implementation
         }
     };
 
@@ -84,12 +85,14 @@ public class Settings extends PreferenceActivity {
 
             });
         }
+
     }
 
 
         @Override
         public void onResume() {
             super.onResume();
+
 /**
  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Settings.this);
  boolean test = preferences.getBoolean("test", false);
@@ -101,4 +104,5 @@ public class Settings extends PreferenceActivity {
  }
  */
         }
-    }
+
+}
