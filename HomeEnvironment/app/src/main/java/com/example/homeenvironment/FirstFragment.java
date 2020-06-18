@@ -31,6 +31,7 @@ public class FirstFragment extends Fragment {
     private float lightQuantity;
     private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
     private NoiseLevel noiseLevel;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(
@@ -44,6 +45,7 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
@@ -82,7 +84,7 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
@@ -108,10 +110,9 @@ public class FirstFragment extends Fragment {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(AppTemperatureSensor.fahrenheit == true){
+        if(sharedPreferences.getBoolean("temperature", false)) {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
-        }
-        else{
+        } else {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
         }
         noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
