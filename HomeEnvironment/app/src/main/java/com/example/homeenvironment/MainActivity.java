@@ -17,6 +17,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.DragEvent;
@@ -29,6 +32,7 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ImageView;
 
     public class MainActivity extends AppCompatActivity {

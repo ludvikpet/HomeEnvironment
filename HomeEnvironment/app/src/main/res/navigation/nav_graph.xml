@@ -40,7 +40,7 @@
     </fragment>
     <activity
         android:id="@+id/soundMeter"
-        android:name="com.example.homeenvironment.NoiseLevel"
+        android:name="com.example.homeenvironment.Sensors.NoiseLevel"
         android:label="acivity_main2"
         tools:layout="@layout/acivity_main2" />
          <action

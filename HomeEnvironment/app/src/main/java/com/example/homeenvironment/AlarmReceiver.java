@@ -49,7 +49,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Log receipt of the Intent with timestamp
         Log.i(TAG,DateFormat.getDateTimeInstance().format(new Date()));
 // The Intent to be used when the user clicks on the Notification View
-        notificationIntent = new Intent(context, HomeActivity.class);
+        notificationIntent = new Intent(context, MainActivity.class);
 
         // The PendingIntent that wraps the underlying Intent
         contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
