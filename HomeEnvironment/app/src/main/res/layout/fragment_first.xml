@@ -5,321 +5,283 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".FirstFragment"
+    tools:layout_editor_absoluteX="-40dp"
+    tools:layout_editor_absoluteY="-17dp">
 
 
     <!-- Temperature -->
+
+    <!-- Pressure level -->
+
+    <!-- Light level -->
+
+    <!-- Humidity level -->
+
+    <!-- Noise -->
+
+    <!-- Buttons -->
+
+    <!-- Information -->
+
+    <TextView
+        android:id="@+id/pressureID"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:paddingTop="2sp"
+        android:paddingBottom="2sp"
+        android:text="0Pa"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureID" />
+
+    <TextView
+        android:id="@+id/lightTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="@string/LightLevelText"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/lightID"
+        app:layout_constraintEnd_toEndOf="@+id/lightID"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="@+id/lightID" />
+
+    <TextView
+        android:id="@+id/humidityID"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:paddingTop="2sp"
+        android:paddingBottom="2sp"
+        android:text="5g/m^3"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lightID" />
+
+    <TextView
+        android:id="@+id/temperatureID"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:paddingTop="2sp"
+        android:paddingBottom="2sp"
+        android:text="0*C"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempTextView" />
 
     <TextView
         android:id="@+id/tempTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="11dp"
         android:text="@string/tempText"
         android:textColor="@color/black"
-        android:textSize="25sp"
         android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/temperatureID"
+        app:layout_constraintStart_toStartOf="@+id/temperatureID"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        app:layout_constraintBottom_toTopOf="@+id/temperatureID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/temperatureID"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-
-        android:layout_marginTop="76dp"
-        android:background="@drawable/value_shape"
-        android:ems="8"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:text="0*C"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/pressureID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <!-- Pressure level -->
-
-    <TextView
-        android:id="@+id/pressureTextView"
+    <Button
+        android:id="@+id/tipsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pressureText"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/pressureID"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/tipsButton"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureID"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/pressureID"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-
-        android:background="@drawable/value_shape"
-        android:ems="8"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:text="0Pa"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
-
-    <!-- Light level -->
-
-    <TextView
-        android:id="@+id/lightTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/LightLevelText"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/lightID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pressureID"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/lightID"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-
-        android:background="@drawable/value_shape"
-        android:ems="8"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:text="0lux"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
-
-    <!-- Humidity level -->
+        app:layout_constraintTop_toBottomOf="@+id/noiseID" />
 
     <TextView
         android:id="@+id/humidityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="1dp"
         android:text="@string/humidityText"
         android:textColor="@color/black"
-        android:textSize="25sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/humidityID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lightID"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/humidityID"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
-        android:background="@drawable/value_shape"
-        android:ems="8"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:text="5g/m^3"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
-
-    <!-- Noise -->
+        app:layout_constraintEnd_toEndOf="@+id/humidityID"
+        app:layout_constraintHorizontal_bias="0.658"
+        app:layout_constraintStart_toStartOf="@+id/humidityID" />
 
     <TextView
         android:id="@+id/noiseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:text="@string/noiseText"
         android:textColor="@color/black"
-        android:textSize="25sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/noiseID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/humidityID"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="@+id/noiseID"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="@+id/noiseID" />
 
     <TextView
         android:id="@+id/noiseID"
-        android:layout_width="200sp"
-        android:layout_height="50sp"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:background="@drawable/value_shape"
         android:ems="8"
         android:gravity="center"
         android:inputType="numberDecimal"
+        android:paddingTop="2sp"
+        android:paddingBottom="2sp"
         android:text="@string/noiseInfo"
         android:textColor="@color/black"
-        android:textSize="25sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        app:layout_constraintTop_toBottomOf="@+id/humidityID" />
 
-    <!-- Buttons -->
-
-    <Button
-        android:id="@+id/tipsButton"
-        android:layout_width="80sp"
-        android:layout_height="40sp"
-        android:background="@drawable/custom_button"
-        android:text="@string/tipsButton"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/measureButton"
+    <TextView
+        android:id="@+id/lightID"
+        android:layout_width="130sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/value_shape"
+        android:ems="8"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:paddingTop="2sp"
+        android:paddingBottom="2sp"
+        android:text="0lux"
+        android:textColor="@color/black"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noiseID"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintTop_toBottomOf="@+id/pressureID" />
 
     <Button
         android:id="@+id/measureButton"
-        android:layout_width="200sp"
-        android:layout_height="80sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tipsButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/custom_button"
         android:text="@string/measureButton"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+        app:autoSizeTextType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
-
-    <!-- Information -->
+        app:layout_constraintTop_toBottomOf="@+id/tipsButton" />
 
     <TextView
-        android:id="@+id/tempInfo"
+        android:id="@+id/pressureTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-        android:layout_marginVertical="20sp"
-
-        android:background="@drawable/circle_info_shape"
-        android:gravity="center"
-        android:text="?"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/pressureText"
+        android:textColor="@color/black"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/temperatureID"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
-
-    <TextView
-        android:id="@+id/pressureInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-
-        android:background="@drawable/circle_info_shape"
-        android:gravity="center"
-        android:text="?"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/pressureID"
-        app:layout_constraintTop_toBottomOf="@+id/tempInfo"
-        app:layout_constraintVertical_bias="0.105" />
-
-    <TextView
-        android:id="@+id/lightInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-
-        android:background="@drawable/circle_info_shape"
-        android:gravity="center"
-        android:text="?"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/lightID"
-        app:layout_constraintTop_toBottomOf="@+id/pressureInfo"
-        app:layout_constraintVertical_bias="0.125" />
-
-    <TextView
-        android:id="@+id/humidityInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-
-        android:background="@drawable/circle_info_shape"
-        android:gravity="center"
-        android:text="?"
-        android:textColor="@color/colorPrimary"
-        android:textSize="25sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/humidityID"
-        app:layout_constraintTop_toBottomOf="@+id/lightInfo"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintBottom_toTopOf="@+id/pressureID"
+        app:layout_constraintEnd_toEndOf="@+id/pressureID"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/pressureID"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureID"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/noiseInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10sp"
-
+        android:layout_marginStart="16dp"
         android:background="@drawable/circle_info_shape"
         android:gravity="center"
         android:text="?"
         android:textColor="@color/colorPrimary"
-        android:textSize="25dp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="@+id/noiseID"
-        app:layout_constraintLeft_toRightOf="@+id/noiseID" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/noiseID"
+        app:layout_constraintStart_toEndOf="@+id/noiseID" />
+
+    <TextView
+        android:id="@+id/tempInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/temperatureID"
+        app:layout_constraintStart_toEndOf="@+id/temperatureID" />
+
+    <TextView
+        android:id="@+id/humidityInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/humidityID"
+        app:layout_constraintStart_toEndOf="@+id/humidityID" />
+
+    <TextView
+        android:id="@+id/pressureInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pressureID"
+        app:layout_constraintStart_toEndOf="@+id/pressureID" />
+
+    <TextView
+        android:id="@+id/lightInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/circle_info_shape"
+        android:gravity="center"
+        android:text="?"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/lightID"
+        app:layout_constraintStart_toEndOf="@+id/lightID" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
