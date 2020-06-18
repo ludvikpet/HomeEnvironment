@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
-public class AlarmCreateActivity {
+public class AlarmCreateActivity{
     private static final long REPEAT_INTERVAL =60*1000L ;
     private AlarmManager alarmManager;
     private PendingIntent receiverPendingIntent;
@@ -21,13 +21,17 @@ public class AlarmCreateActivity {
 
     public void setRepeating(){
 
-        if(alarmManager != null){
-            alarmManager.cancel(receiverPendingIntent);
-            Log.i("Alarm", "AlarmCreateActivity her! has cancel alarm ");
-        }
+        String notificationBoolean = view.getContext().getString(R.string.notification_Boolean);
+        Log.i("Alarm","notificationBoolean: " + notificationBoolean);
+        if(notificationBoolean.equals("true")){
+            if(alarmManager != null){
+                alarmManager.cancel(receiverPendingIntent);
+                Log.i("Alarm", "AlarmCreateActivity her! has cancel alarm ");
+            }
 
-        alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),50000,receiverPendingIntent);
-        Log.i("Alarm", "AlarmCreateActivity her! has set repeating ");
+            alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),50000,receiverPendingIntent);
+            Log.i("Alarm", "AlarmCreateActivity her! has set repeating ");
+        }
     }
 }

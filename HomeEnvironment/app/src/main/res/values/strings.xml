@@ -48,7 +48,7 @@
     <string name="key_notification" />
     <string name="key_temperature" />
 
-    <string name="notification_Boolean" />
+    <string name="notification_Boolean" >false</string>
     <string name="temperature_Boolean"/>
 
     </resources>
