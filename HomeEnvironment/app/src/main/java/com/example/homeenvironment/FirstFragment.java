@@ -100,9 +100,11 @@ public class FirstFragment extends Fragment {
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
                 if(sharedPreferences.getBoolean("temperature", false)) {
+                    mTemperatureSensor.fahrenheit = true;
                     temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "F"));
                 }
                 else {
+                    mTemperatureSensor.fahrenheit = false;
                     temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
                 }
                 if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {

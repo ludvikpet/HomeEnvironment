@@ -41,7 +41,7 @@ public class AppTemperatureSensor {
     public float getTemperature(){
         if(temperatureSensor == null) Toast.makeText(view.getContext(), "This phone doesn't have a temperature sensor", Toast.LENGTH_SHORT).show();
 
-        if(fahrenheit = true){
+        if(fahrenheit){
             return (float) (temperature * 1.8 + 32);
         }
         else{
