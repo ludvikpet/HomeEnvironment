@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Sensors;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -26,6 +26,7 @@ public class NoiseLevel extends AppCompatActivity {
     private final Handler mHandler = new Handler();
     private boolean permission;
     private View view;
+    private boolean isRunning;
 
 
     final Runnable updater = new Runnable() {
@@ -66,11 +67,13 @@ public class NoiseLevel extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
+        isRunning = true;
         startRecorder();
     }
 
     public void onPause() {
         super.onPause();
+        isRunning = false;
         stopRecorder();
     }
 
@@ -81,6 +84,7 @@ public class NoiseLevel extends AppCompatActivity {
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC);
             mRecorder.setOutputFile("/dev/null");
+            isRunning = true;
             try {
                 mRecorder.prepare();
             } catch (java.io.IOException ioe) {
@@ -101,6 +105,7 @@ public class NoiseLevel extends AppCompatActivity {
 
     public void stopRecorder() {
         if (mRecorder != null) {
+            isRunning = false;
             mRecorder.stop();
             mRecorder.release();
             mRecorder = null;
@@ -136,5 +141,8 @@ public class NoiseLevel extends AppCompatActivity {
 
     public void stopThread() {
         runner.interrupt();
+    }
+    public boolean isRunning(){
+        return isRunning;
     }
 }
