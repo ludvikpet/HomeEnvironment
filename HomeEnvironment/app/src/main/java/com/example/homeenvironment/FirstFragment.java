@@ -25,10 +25,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
+
+import java.util.Random;
 
 import static android.content.Context.SENSOR_SERVICE;
 import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
@@ -121,9 +124,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "info");
                 popUp.putExtra("infoType", "tempInfo");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
@@ -131,9 +133,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "info");
                 popUp.putExtra("infoType", "pressureInfo");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
@@ -141,9 +142,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "info");
                 popUp.putExtra("infoType", "lightInfo");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
@@ -151,9 +151,8 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "info");
                 popUp.putExtra("infoType", "humidityInfo");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
@@ -161,13 +160,25 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "info");
                 popUp.putExtra("infoType", "noiseInfo");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
     }
+
+    private void initializePopUp(Intent popUp) {
+        popUp.putExtra("info/tip", "info");
+        startActivity(popUp);
+        Random random = new Random();
+        int potentialWindMill = random.nextInt(25);
+        if(potentialWindMill < 1) {
+            Animatoo.animateSpin(getContext());
+        } else {
+            Animatoo.animateFade(getContext());
+        }
+    }
+
     private Float getTemperature(){
 
         float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();

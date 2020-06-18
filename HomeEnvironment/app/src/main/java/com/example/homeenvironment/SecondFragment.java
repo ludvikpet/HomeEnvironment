@@ -12,6 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+
+import java.util.Random;
+
 public class SecondFragment extends Fragment {
 
     @Override
@@ -31,50 +35,54 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "tip");
                 popUp.putExtra("tipType", "tempTip");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
         view.findViewById(R.id.button_pressure_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "tip");
                 popUp.putExtra("tipType", "pressureTip");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
         view.findViewById(R.id.button_light_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "tip");
                 popUp.putExtra("tipType", "lightTip");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
         view.findViewById(R.id.button_humidity_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "tip");
                 popUp.putExtra("tipType", "humidityTip");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
         view.findViewById(R.id.button_noise_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("info/tip", "tip");
                 popUp.putExtra("tipType", "noiseTip");
-                startActivity(popUp);
+                initializePopUp(popUp);
             }
         });
 
 
     }
-
-
+        private void initializePopUp(Intent popUp) {
+        popUp.putExtra("info/tip", "tip");
+        startActivity(popUp);
+        Random random = new Random();
+        int potentialWindMill = random.nextInt(25);
+        if(potentialWindMill < 1) {
+            Animatoo.animateSpin(getContext());
+        } else {
+            Animatoo.animateFade(getContext());
+        }
+    }
 }
