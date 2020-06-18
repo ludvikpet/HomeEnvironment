@@ -1,8 +1,6 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -121,16 +118,18 @@ public class WeatherRetriever {
         //Log.i("WeatherRetriever", "End of method");
     }
 
-
-    public int getHumidity()  {
+    //Hvis humidity eller temperatur er null, så betyder det at brugeren ikke befinder sig i en by. Returner "base" værdi.
+    public String getHumidity()  {
         Log.i("WeatherRetriever", "This is the humidity " + humidity);
-        return Integer.parseInt(humidity);
+        if(humidity == null) return ""+0;
+        else return humidity;
     }
 
 
     public String getTemperature()  {
         Log.i("WeatherRetriever", "This is the temperature " + temperature);
-        return temperature;
+        if(temperature == null) return ""+0;
+        else return temperature;
     }
 
     public void setWeather(View view) {
@@ -150,11 +149,16 @@ public class WeatherRetriever {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                return;
             }
 
             Weather weather = new Weather();
             try {
-
+                /**I tilfælde af at brugeren ikke er i en by, så kan programmet ikke hente dataen omrking brugeren.
+                 I så fald vil vi afbryde funktionen, for ikke at crash programmet.
+                 Problemet kan eventuelt løses ved at finde en anden måde at hente vejdata som ikke er afhængig af byer, men dette er udenfor ekspertise samt tidsbudget.
+                */
+                 if(this.cityName == null) return;
                 //Log.i("WeatherRetriever", "final city name: "+cityName);
                 content = weather.execute("https://openweathermap.org/data/2.5/weather?q="+cityName+"&appid=439d4b804bc8187953eb36d2a8c26a02").get();
                 JSONObject json = new JSONObject(content);
