@@ -12,7 +12,7 @@ import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
 import static android.hardware.Sensor.TYPE_LIGHT;
 
 public class AppTemperatureSensor {
-    public static boolean fahrenheit;
+    public static String temperatureMode = "Unchanged";
     private SensorManager sensorManager;
     private Sensor temperatureSensor;
     private SensorEventListener temperatureEventListener;
@@ -40,13 +40,9 @@ public class AppTemperatureSensor {
 
     public float getTemperature(){
         if(temperatureSensor == null) Toast.makeText(view.getContext(), "This phone doesn't have a temperature sensor", Toast.LENGTH_SHORT).show();
-
-        if(fahrenheit = true){
-            return (float) (temperature * 1.8 + 32);
-        }
-        else{
-            return (temperature-32) * 5/9;
-        }
-
+       return temperature;
+    }
+    public boolean hasTemperatureSensor(){
+        return (!(temperatureSensor == null));
     }
 }

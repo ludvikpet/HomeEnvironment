@@ -31,7 +31,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("tipType", "temp");
+                popUp.putExtra("info/tip", "tip");
+                popUp.putExtra("tipType", "tempTip");
                 startActivity(popUp);
             }
         });
@@ -39,7 +40,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("tipType", "pressure");
+                popUp.putExtra("info/tip", "tip");
+                popUp.putExtra("tipType", "pressureTip");
                 startActivity(popUp);
             }
         });
@@ -47,7 +49,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("tipType", "light");
+                popUp.putExtra("info/tip", "tip");
+                popUp.putExtra("tipType", "lightTip");
                 startActivity(popUp);
             }
         });
@@ -55,7 +58,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("tipType", "humidity");
+                popUp.putExtra("info/tip", "tip");
+                popUp.putExtra("tipType", "humidityTip");
                 startActivity(popUp);
             }
         });
@@ -63,7 +67,8 @@ public class SecondFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent popUp = new Intent(getActivity(), TipTextScreen.class);
-                popUp.putExtra("tipType", "noise");
+                popUp.putExtra("info/tip", "tip");
+                popUp.putExtra("tipType", "noiseTip");
                 startActivity(popUp);
             }
         });

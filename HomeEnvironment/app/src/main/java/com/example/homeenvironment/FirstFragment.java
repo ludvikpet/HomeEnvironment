@@ -1,9 +1,12 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -27,6 +30,9 @@ import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
 
+import static android.content.Context.SENSOR_SERVICE;
+import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
+
 public class FirstFragment extends Fragment {
     private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
@@ -36,6 +42,8 @@ public class FirstFragment extends Fragment {
     private float lightQuantity;
     private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
     private NoiseLevel noiseLevel;
+    private SharedPreferences sharedPreferences;
+    private WeatherRetriever weatherRetriever;
 
     @Override
     public View onCreateView(
@@ -49,6 +57,8 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
@@ -59,10 +69,11 @@ public class FirstFragment extends Fragment {
         humidityText = view.findViewById(R.id.humidityID);
         temperatureText = view.findViewById(R.id.temperatureID);
         noiseLevelText = view.findViewById(R.id.noiseID);
-
         setScale(view);
-
-        if (ContextCompat.checkSelfPermission(this.requireContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
+        weatherRetriever = new WeatherRetriever(view);
+        weatherRetriever.setWeather(view);
+        weatherRetriever.getHumidity();
+        if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
         }
 
@@ -92,15 +103,15 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
-                humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
-                if(sharedPreferences.getBoolean("temperature", false)) {
-                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "F"));
+                humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
+                if(AppTemperatureSensor.temperatureMode == "true") {
+                    temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 }
                 else {
-                    temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "℃"));
+                    temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "℃"));
                 }
                 if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
@@ -112,19 +123,82 @@ public class FirstFragment extends Fragment {
                 alarmCreateActivity.setRepeating();
             }
         });
-    }
 
-    /**
-     * Sets initial information for the text for the sensors
-     */
+        view.findViewById(R.id.button_tempInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "tempInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_pressureInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "pressureInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_lightInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "lightInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_humidityInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "humidityInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_noiseInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "noiseInfo");
+                startActivity(popUp);
+            }
+        });
+
+    }
+    private Float getTemperature(){
+
+        Float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
+       if(mTemperatureSensor.temperatureMode == "true"){
+           return (temp * 9/5 + 32);
+       }
+       else if(mTemperatureSensor.temperatureMode == "False"){
+           return (temp-32) * 5/9;
+       }
+       else return
+                   temp;
+
+    }
+    private int getHumidity(){
+        int humidity = (mBarometerSensor.hasHumiditySensor()) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
+        return humidity;
+    }
     private void setInfo() {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(AppTemperatureSensor.fahrenheit){
+        if(mTemperatureSensor.temperatureMode == "true"){
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
-        }
-        else{
+        } else {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
         }
         noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -21,6 +23,14 @@ public class TipTextScreen extends Activity {
     private String humidityTip = "Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level.";
     private String noiseTip = "The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently higher than 60 dB, consider moving to a quieter workspace or ask the people around you to quiet down.";
 
+    private String tempInfo = "Ideal temperature is 22C/72F";
+    private String pressureInfo = "Ideal pressure is 985 Pa";
+    private String lightInfo = "Ideal lux is 320-500 lx";
+    private String humidityInfo = "Ideal humidity is 45% - 55%";
+    private String noiseInfo = "Ideal noise level is >60 dB";
+
+    TextView tipText;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,25 +44,57 @@ public class TipTextScreen extends Activity {
         int width = dm.widthPixels;
         int heigt = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .8), (int) (heigt * .6));
+        tipText = (TextView) findViewById(id.textview_the_tip);
 
-        TextView tipText = (TextView) findViewById(id.textview_the_tip);
+        tipText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         if(tipText != null){
             Intent intent = getIntent();
-            String type = intent.getStringExtra("tipType");
-
-            if(type.equals("temp")) {
-                tipText.setText(tempTip);
-            } else if(type.equals("pressure")){
-                tipText.setText(pressureTip);
-            } else if(type.equals("light")){
-                tipText.setText(lightTip);
-            } else if(type.equals("humidity")){
-                tipText.setText(humidityTip);
-            } else if(type.equals("noise")) {
-                tipText.setText(noiseTip);
+            String decider = intent.getStringExtra("info/tip");
+            String type = "null";
+            if(decider.equals("tip")) {
+                type = intent.getStringExtra("tipType");
+                getWindow().setLayout((int) (width * .8), (int) (heigt * .6));
+                getTheTip(type);
+            } else {
+                type = intent.getStringExtra("infoType");
+                getWindow().setLayout((int) (width * .8), (int) (heigt * .15));
+                getTheInfo(type);
             }
-            }
+        }
+    }
 
+
+    private void getTheTip(String type) {
+        if(type.equals("tempTip")) {
+            tipText.setText(tempTip);
+        } else if(type.equals("pressureTip")){
+            tipText.setText(pressureTip);
+        } else if(type.equals("lightTip")){
+            tipText.setText(lightTip);
+        } else if(type.equals("humidityTip")){
+            tipText.setText(humidityTip);
+        } else if(type.equals("noiseTip")) {
+            tipText.setText(noiseTip);
+        }
+    }
+
+    private void getTheInfo(String type) {
+        if(type.equals("tempInfo")) {
+            tipText.setText(tempInfo);
+        } else if(type.equals("pressureInfo")){
+            tipText.setText(pressureInfo);
+        } else if(type.equals("lightInfo")){
+            tipText.setText(lightInfo);
+        } else if(type.equals("humidityInfo")){
+            tipText.setText(humidityInfo);
+        } else if(type.equals("noiseInfo")) {
+            tipText.setText(noiseInfo);
+        }
     }
 }
