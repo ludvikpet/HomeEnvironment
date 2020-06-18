@@ -31,6 +31,10 @@ public class NoiseLevel extends AppCompatActivity {
         return 20 * Math.log10(getAmplitudeEMA() / ampl);
     }
 
+    /**
+     * Get current highest amplitude
+     * @return returns maximum absolute measured amplitude
+     */
     public double getAmplitude() {
         if (mRecorder != null)
             return (mRecorder.getMaxAmplitude());
@@ -39,6 +43,10 @@ public class NoiseLevel extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets average amplitude with specified filters
+     * @return returns double average amplitude
+     */
     public double getAmplitudeEMA() {
         double amp = getAmplitude();
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
@@ -49,9 +57,6 @@ public class NoiseLevel extends AppCompatActivity {
         return (float) soundDb(10 * Math.exp(-3));
     }
 
-    public NoiseLevel(View view) {
-        onRecord(!isRunning);
-    }
     private void onRecord(boolean start) {
         if (start) {
             startRecorder();
@@ -59,6 +64,10 @@ public class NoiseLevel extends AppCompatActivity {
             stopRecorder();
         }
     }
+
+    /**
+     * Starts the recorder and checks that there isn't already a mRecorder
+     */
     private void startRecorder() {
         if(mRecorder == null){
         mRecorder = new MediaRecorder();
@@ -77,6 +86,9 @@ public class NoiseLevel extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stops the recorder
+     */
     public void stopRecorder() {
         Log.i(TAG_noise, "mRecorder stopping with stopRecorder()");
         mRecorder.stop();
@@ -99,10 +111,19 @@ public class NoiseLevel extends AppCompatActivity {
         isRunning = false;
         stopRecorder();
     }
+
     @Override
     public void onResume() {
         super.onResume();
         isRunning = true;
         startRecorder();
+    }
+
+    /**
+     * Constructor for NoiseLevel
+     * @param view for current view
+     */
+    public NoiseLevel(View view) {
+        onRecord(!isRunning);
     }
 }
