@@ -33,6 +33,7 @@ public class TipTextScreen extends Activity {
 
     TextView tipText;
     String type;
+    ConstraintLayout tipLayout;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -47,7 +48,7 @@ public class TipTextScreen extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
-        int heigt = dm.heightPixels;
+        int height = dm.heightPixels;
 
         tipText = (TextView) findViewById(id.textview_the_tip);
 
@@ -58,17 +59,28 @@ public class TipTextScreen extends Activity {
             }
         });
 
+        tipLayout = (ConstraintLayout) findViewById(id.tiptextscreen_layout);
+
+        tipLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+
         if(tipText != null){
             Intent intent = getIntent();
             String decider = intent.getStringExtra("info/tip");
 
             if(decider.equals("tip")) {
                 type = intent.getStringExtra("tipType");
-                getWindow().setLayout((int) (width * .8), (int) (heigt * .5));
+                getWindow().setLayout((int) (width * .8), (int) (height * .5));
                 getTheTip(type);
             } else {
                 type = intent.getStringExtra("infoType");
-                getWindow().setLayout((int) (width * .8), (int) (heigt * .15));
+                getWindow().setLayout((int) (width * .8), (int) (height * .15));
                 getTheInfo(type);
             }
         }
