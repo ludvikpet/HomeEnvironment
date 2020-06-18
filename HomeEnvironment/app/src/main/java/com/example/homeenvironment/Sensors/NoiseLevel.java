@@ -14,112 +14,27 @@ import android.widget.TextView;
 
 import com.example.homeenvironment.R;
 
+import java.io.IOException;
+
 public class NoiseLevel extends AppCompatActivity {
 
 
     TextView mStatusView;
     MediaRecorder mRecorder;
-    Thread runner;
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
-    private final static String TAG = "Noise Level ";
-    private final Handler mHandler = new Handler();
-    private boolean permission;
-    private View view;
+    private final static String TAG_noise = "Noise Level ";
+    private static String fileName = "/dev/null";
     private boolean isRunning;
-
-
-    final Runnable updater = new Runnable() {
-        public void run() {
-            updateTv();
-        }
-    };
-
-
-    //    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-    public NoiseLevel(View view) {
-        this.view = view;
-        Log.i(TAG, "CREATION");
-//        setContentView(R.layout.fragment_first);
-//        mStatusView = findViewById(R.id.noiseID);
-//        mStatusView.setText("0.00 dB");
-        permission = ContextCompat.checkSelfPermission(this.view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
-        if (runner == null && permission) {
-            runner = new Thread() {
-                public void run() {
-                    while (runner != null) {
-                        try {
-                            Thread.sleep(600);
-//                            Log.i(TAG, "Current noise: " + (float) soundDb(10 * Math.exp(-3)));
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        mHandler.post(updater);
-                    }
-                }
-            };
-            runner.start();
-            Log.d(TAG, "start runner()");
-        }
-    }
-
-    public void onResume() {
-
-        super.onResume();
-        isRunning = true;
-        startRecorder();
-    }
-
-    public void onPause() {
-        super.onPause();
-        isRunning = false;
-        stopRecorder();
-    }
-
-    public void startRecorder() {
-        if (mRecorder == null && permission) {
-            mRecorder = new MediaRecorder();
-            mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC);
-            mRecorder.setOutputFile("/dev/null");
-            isRunning = true;
-            try {
-                mRecorder.prepare();
-            } catch (java.io.IOException ioe) {
-                Log.i("IO ", "IOException: " + android.util.Log.getStackTraceString(ioe));
-
-            } catch (java.lang.SecurityException e) {
-                Log.i("Security ", "SecurityException: " + android.util.Log.getStackTraceString(e));
-            }
-            try {
-                mRecorder.start();
-            } catch (java.lang.SecurityException e) {
-                Log.i("Security ", "SecurityException: " + android.util.Log.getStackTraceString(e));
-            }
-
-        }
-
-    }
-
-    public void stopRecorder() {
-        if (mRecorder != null) {
-            isRunning = false;
-            mRecorder.stop();
-            mRecorder.release();
-            mRecorder = null;
-        }
-    }
-
-    public void updateTv() {
-//        mStatusView.setText(getString(R.string.noiseInfo, (float) soundDb(10 * Math.exp(-3))));
-    }
 
     public double soundDb(double ampl) {
         return 20 * Math.log10(getAmplitudeEMA() / ampl);
     }
 
+    /**
+     * Get current highest amplitude
+     * @return returns maximum absolute measured amplitude
+     */
     public double getAmplitude() {
         if (mRecorder != null)
             return (mRecorder.getMaxAmplitude());
@@ -128,7 +43,10 @@ public class NoiseLevel extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Gets average amplitude with specified filters
+     * @return returns double average amplitude
+     */
     public double getAmplitudeEMA() {
         double amp = getAmplitude();
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
@@ -139,10 +57,73 @@ public class NoiseLevel extends AppCompatActivity {
         return (float) soundDb(10 * Math.exp(-3));
     }
 
-    public void stopThread() {
-        runner.interrupt();
+    private void onRecord(boolean start) {
+        if (start) {
+            startRecorder();
+        } else {
+            stopRecorder();
+        }
     }
-    public boolean isRunning(){
-        return isRunning;
+
+    /**
+     * Starts the recorder and checks that there isn't already a mRecorder
+     */
+    private void startRecorder() {
+        if(mRecorder == null){
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(fileName);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(TAG_noise, "prepare() failed");
+        }
+        isRunning = true;
+        mRecorder.start();
+        }
+    }
+
+    /**
+     * Stops the recorder
+     */
+    public void stopRecorder() {
+        Log.i(TAG_noise, "mRecorder stopping with stopRecorder()");
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mRecorder != null) {
+            Log.i(TAG_noise, "onStop()");
+            mRecorder.release();
+            mRecorder = null;
+        }
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG_noise, "onPause()");
+        isRunning = false;
+        stopRecorder();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isRunning = true;
+        startRecorder();
+    }
+
+    /**
+     * Constructor for NoiseLevel
+     * @param view for current view
+     */
+    public NoiseLevel(View view) {
+        onRecord(!isRunning);
     }
 }

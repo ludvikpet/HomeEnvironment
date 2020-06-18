@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
@@ -36,7 +37,6 @@ import static android.content.Context.SENSOR_SERVICE;
 import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
 
 public class FirstFragment extends Fragment {
-    private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
     private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
     private AppTemperatureSensor mTemperatureSensor;
@@ -78,7 +78,6 @@ public class FirstFragment extends Fragment {
         weatherRetriever.getHumidity();
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
-//            if(!noiseLevel.isRunning()) noiseLevel.startRecorder();
         }
 
         setInfo();
@@ -89,6 +88,7 @@ public class FirstFragment extends Fragment {
                 try {
                     noiseLevel.stopRecorder();
                 } catch (RuntimeException stopException) {
+                    Log.i("NOISE ", "stopRecording() failed");
 
                 }
                 NavHostFragment.findNavController(FirstFragment.this)
@@ -200,7 +200,7 @@ public class FirstFragment extends Fragment {
 
     }
     private int getHumidity(){
-        int humidity = (mBarometerSensor.hasHumiditySensor()) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
+        int humidity = ((mBarometerSensor.hasHumiditySensor())) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
         return humidity;
     }
     private void setInfo() {
@@ -278,4 +278,16 @@ public class FirstFragment extends Fragment {
         textView.setWidth(width);
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        Log.e("Noise ", "onPause() in fragment");
+        if(noiseLevel != null) {
+            try {
+                noiseLevel.stopRecorder();
+            } catch (RuntimeException stopException){
+
+            }
+        }
+    }
 }
