@@ -189,7 +189,7 @@ public class FirstFragment extends Fragment {
 
     }
     private int getHumidity(){
-        int humidity = (mBarometerSensor.hasHumiditySensor()) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
+        int humidity = ((mBarometerSensor.hasHumiditySensor())) ? mBarometerSensor.getHumidity() : Integer.parseInt(weatherRetriever.getHumidity());
         return humidity;
     }
     private void setInfo() {

@@ -37,15 +37,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-    public class MainActivity extends AppCompatActivity {
-        private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
-        FragmentManager fragmentManager;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+public class MainActivity extends AppCompatActivity {
+    private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
+    FragmentManager fragmentManager;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.activity_main);
-            fragmentManager = getSupportFragmentManager();
+        setContentView(R.layout.activity_main);
+        fragmentManager = getSupportFragmentManager();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -58,17 +58,14 @@ import android.widget.ImageView;
         String storeReminderInterval = settinf.getString(getString(R.string.key_reminder),"halv time");
         // Boolean storeNotificationOption = settinf.getBoolean(String.valueOf(R.string.key_notification),false);
         // Boolean storeTempratureOption = settinf.getBoolean(String.valueOf(R.string.key_temperature),false);
-        
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, MY_PERMISSIONS_RECORD_AUDIO);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_RECORD_AUDIO);
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        }
+
 
     }
 
