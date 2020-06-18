@@ -108,7 +108,7 @@ public class FirstFragment extends Fragment {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(AppTemperatureSensor.fahrenheit == true){
+        if(AppTemperatureSensor.temperatureMode == "true"){
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
         }
         else{

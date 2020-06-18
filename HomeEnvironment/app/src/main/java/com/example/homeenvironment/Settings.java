@@ -48,10 +48,10 @@ public class Settings extends PreferenceActivity {
                     String notification_bool = getString(R.string.notification_Boolean);
                     if (tempPref.isChecked()) {
                         tempPref.setChecked(false);
-                        AppTemperatureSensor.fahrenheit = false;
+                        AppTemperatureSensor.temperatureMode = "false";
                     } else {
                         tempPref.setChecked(true);
-                        AppTemperatureSensor.fahrenheit = true;
+                        AppTemperatureSensor.temperatureMode = "true";
                     }
                     return false;
                 }
