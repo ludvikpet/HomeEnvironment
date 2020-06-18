@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 
+import java.time.Instant;
+
 public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
@@ -34,7 +36,6 @@ public class Settings extends PreferenceActivity {
 
     public static class MyPreferenceFragment extends PreferenceFragment {
 
-
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class Settings extends PreferenceActivity {
                         tempPref.setChecked(true);
                         AppTemperatureSensor.fahrenheit = true;
                     }
+
                     return false;
                 }
             });
@@ -66,13 +68,14 @@ public class Settings extends PreferenceActivity {
 
                     if (notificationsPref.isChecked()) {
 
-                        notification_bool = "true";
+                        notification_bool = "false";
                         notificationsPref.setChecked(false);
 
                     } else if (!notificationsPref.isChecked()) {
                         notification_bool = "true";
                         notificationsPref.setChecked(true);
                     }
+
                     return false;
                 }
 
