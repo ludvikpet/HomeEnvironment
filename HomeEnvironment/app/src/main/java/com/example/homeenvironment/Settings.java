@@ -2,6 +2,7 @@ package com.example.homeenvironment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -10,6 +11,8 @@ import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 
@@ -50,10 +53,10 @@ public class Settings extends PreferenceActivity {
                     String notification_bool = getString(R.string.notification_Boolean);
                     if (tempPref.isChecked()) {
                         tempPref.setChecked(false);
-                        AppTemperatureSensor.fahrenheit = false;
+                        AppTemperatureSensor.temperatureMode= "false";
                     } else {
                         tempPref.setChecked(true);
-                        AppTemperatureSensor.fahrenheit = true;
+                        AppTemperatureSensor.temperatureMode = "true";
                     }
 
                     return false;
@@ -62,17 +65,17 @@ public class Settings extends PreferenceActivity {
             //Notifications switch
             notificationsPref = (android.preference.SwitchPreference) findPreference("notifications");
             notificationsPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-                    String notification_bool = getString(R.string.notification_Boolean);
+                                 
 
                     if (notificationsPref.isChecked()) {
 
-                        notification_bool = "false";
                         notificationsPref.setChecked(false);
 
                     } else if (!notificationsPref.isChecked()) {
-                        notification_bool = "true";
+
                         notificationsPref.setChecked(true);
                     }
 

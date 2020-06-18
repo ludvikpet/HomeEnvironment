@@ -48,7 +48,7 @@
     <string name="notification" />
     <string name="temperature" />
 
-    <string name="notification_Boolean" >false</string>
-    <string name="temperature_Boolean"/>
+    <string name="notification_Boolean">false</string>
+    <string name="temperature_Boolean">false</string>
 
     </resources>

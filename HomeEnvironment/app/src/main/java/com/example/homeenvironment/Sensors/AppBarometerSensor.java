@@ -64,7 +64,13 @@ public class AppBarometerSensor {
         return (int) pressureAmount;
     }
     public int getHumidity(){
-        if(pressureSensor == null) Toast.makeText(view.getContext(),"Your phone doesn't have a pressure sensor", Toast.LENGTH_SHORT);
+        if(humiditySensor == null) Toast.makeText(view.getContext(),"Your phone doesn't have a pressure sensor", Toast.LENGTH_SHORT);
         return (int) humidityAmount;
+    }
+    public boolean hasHumiditySensor(){
+        return (!(humiditySensor == null));
+    }
+    public boolean hasPressureSensor(){
+        return (!(pressureSensor == null));
     }
 }
