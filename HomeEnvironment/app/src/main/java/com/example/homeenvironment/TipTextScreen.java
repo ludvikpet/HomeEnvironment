@@ -19,18 +19,6 @@ import static com.example.homeenvironment.R.*;
 
 public class TipTextScreen extends Activity {
 
-    private String tempTip = "The ideal room temperature in an office space is around 22C or 72F. If your room is warmer than this, consider opening a few windows or using a fan. If your room is colder you might want to consider moving closer to a heat source and not opening any windows for extended periods of time.";
-    private String pressureTip = "The ideal level of pressure in an area fit for office work is around 985 Pa. If your area consistently has lower pressure, you might want to consider moving to a lower altitude when you work.";
-    private String lightTip = "The ideal light level for your working space should be around 320-500 lx. Is it much brighter, consider rolling down some blinds or going to a more shaded area. Is it darker, turn on some lights or ideally you can get some sunlight by opening up your blinds.";
-    private String humidityTip = "Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level.";
-    private String noiseTip = "The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently higher than 60 dB, consider moving to a quieter workspace or ask the people around you to quiet down.";
-
-    private String tempInfo = "Ideal temperature is 22C/72F ";
-    private String pressureInfo = "Ideal pressure is 985 Pa";
-    private String lightInfo = "Ideal lux is 320-500 lx";
-    private String humidityInfo = "Ideal humidity is 45% - 55%";
-    private String noiseInfo = "Ideal noise level is >60 dB";
-
     TextView tipText;
     String type;
     ConstraintLayout tipLayout;
@@ -52,13 +40,6 @@ public class TipTextScreen extends Activity {
 
         tipText = (TextView) findViewById(id.textview_the_tip);
 
-        tipText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         tipLayout = (ConstraintLayout) findViewById(id.tiptextscreen_layout);
 
         tipLayout.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +48,6 @@ public class TipTextScreen extends Activity {
                 finish();
             }
         });
-
-
 
         if(tipText != null){
             Intent intent = getIntent();
@@ -88,30 +67,42 @@ public class TipTextScreen extends Activity {
 
 
     private void getTheTip(String type) {
-        if(type.equals("tempTip")) {
-            tipText.setText(tempTip);
-        } else if(type.equals("pressureTip")){
-            tipText.setText(pressureTip);
-        } else if(type.equals("lightTip")){
-            tipText.setText(lightTip);
-        } else if(type.equals("humidityTip")){
-            tipText.setText(humidityTip);
-        } else if(type.equals("noiseTip")) {
-            tipText.setText(noiseTip);
+        switch (type) {
+            case "tempTip":
+                tipText.setText(string.tempTipText);
+                break;
+            case "pressureTip":
+                tipText.setText(string.pressureTipText);
+                break;
+            case "lightTip":
+                tipText.setText(string.lightTipText);
+                break;
+            case "humidityTip":
+                tipText.setText(string.humidityTipText);
+                break;
+            case "noiseTip":
+                tipText.setText(string.noiseTipText);
+                break;
         }
     }
 
     private void getTheInfo(String type) {
-        if(type.equals("tempInfo")) {
-            tipText.setText(tempInfo);
-        } else if(type.equals("pressureInfo")){
-            tipText.setText(pressureInfo);
-        } else if(type.equals("lightInfo")){
-            tipText.setText(lightInfo);
-        } else if(type.equals("humidityInfo")){
-            tipText.setText(humidityInfo);
-        } else if(type.equals("noiseInfo")) {
-            tipText.setText(noiseInfo);
+        switch (type) {
+            case "tempInfo":
+                tipText.setText(string.tempInfoText);
+                break;
+            case "pressureInfo":
+                tipText.setText(string.pressureInfoText);
+                break;
+            case "lightInfo":
+                tipText.setText(string.lightInfoText);
+                break;
+            case "humidityInfo":
+                tipText.setText(string.humidityInfoText);
+                break;
+            case "noiseInfo":
+                tipText.setText(string.noiseInfoText);
+                break;
         }
     }
 }
