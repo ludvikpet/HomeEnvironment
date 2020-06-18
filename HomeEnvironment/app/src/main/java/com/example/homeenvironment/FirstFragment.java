@@ -113,7 +113,7 @@ public class FirstFragment extends Fragment {
 
                 }
                 Log.i("Alarm","FirstFragment her! Setting Repeating" );
-//                alarmCreateActivity.setRepeating();
+                alarmCreateActivity.setRepeating();
             }
         });
 
