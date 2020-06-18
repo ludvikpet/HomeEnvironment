@@ -1,9 +1,11 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -51,11 +53,6 @@ public class FirstFragment extends Fragment {
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
         mTemperatureSensor = new AppTemperatureSensor(view);
-        final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
-        //luxText = view.findViewById(R.id.Lux_Measurement);
-        //pressureText = view.findViewById(R.id.pressureSensorView);
-        //humidityText = view.findViewById(R.id.Humidity_Text);
-        //temperatureText = view.findViewById(R.id.Temperature_Text);
         luxText = view.findViewById(R.id.lightID);
         pressureText = view.findViewById(R.id.pressureID);
         humidityText = view.findViewById(R.id.humidityID);
@@ -94,10 +91,11 @@ public class FirstFragment extends Fragment {
         view.findViewById(R.id.measureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, mBarometerSensor.getHumidity()));
-                if(AppTemperatureSensor.fahrenheit) {
+                if(sharedPreferences.getBoolean("temperature", false)) {
                     temperatureText.setText(getString(R.string.tempInfo, mTemperatureSensor.getTemperature(), "F"));
                 }
                 else {
