@@ -39,8 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     // Notification Sound and Vibration on Arrival
     private final long[] vibratePattern = {100, 100, 100, 400, 400, 100, 100, 100};
 
-    public AlarmReceiver() {
-    }
+
 
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.O)

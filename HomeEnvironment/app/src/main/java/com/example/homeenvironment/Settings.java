@@ -1,5 +1,6 @@
 package com.example.homeenvironment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,21 +10,24 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 
+import java.time.Instant;
+
 public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
     public static SwitchPreference notificationsPref;
-
+    public static SwitchPreference interval;
+    private String timeInterval;
     private final static String TAG = "Settings";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            // Implementation
         }
     };
 
@@ -35,7 +39,6 @@ public class Settings extends PreferenceActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment {
-
 
         @Override
         public void onCreate(final Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class Settings extends PreferenceActivity {
                         tempPref.setChecked(true);
                         AppTemperatureSensor.temperatureMode = "true";
                     }
+
                     return false;
                 }
             });
@@ -65,6 +69,7 @@ public class Settings extends PreferenceActivity {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
+                                 
 
                     if (notificationsPref.isChecked()) {
 
@@ -74,17 +79,20 @@ public class Settings extends PreferenceActivity {
 
                         notificationsPref.setChecked(true);
                     }
+
                     return false;
                 }
 
             });
         }
+
     }
 
 
         @Override
         public void onResume() {
             super.onResume();
+
 /**
  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Settings.this);
  boolean test = preferences.getBoolean("test", false);
@@ -96,4 +104,5 @@ public class Settings extends PreferenceActivity {
  }
  */
         }
-    }
+
+}

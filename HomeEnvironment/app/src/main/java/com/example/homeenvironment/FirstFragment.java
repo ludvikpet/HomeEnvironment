@@ -1,6 +1,7 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -36,6 +37,8 @@ import java.util.Random;
 import static android.content.Context.SENSOR_SERVICE;
 import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
 
+import java.time.Instant;
+
 public class FirstFragment extends Fragment {
     private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
@@ -45,6 +48,8 @@ public class FirstFragment extends Fragment {
     private float lightQuantity;
     private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
     private NoiseLevel noiseLevel;
+    private AlarmCreateActivity alarmCreateActivity;
+   // private SharedPreferences sharedPreferences;
     private SharedPreferences sharedPreferences;
     private WeatherRetriever weatherRetriever;
 
@@ -60,6 +65,10 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(alarmCreateActivity == null){
+            alarmCreateActivity = new AlarmCreateActivity(view);
+        }
+        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mLightSensor = new AppLightSensor(view);
@@ -79,6 +88,17 @@ public class FirstFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
         }
+        setInfo();
+/*
+        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                Log.i("Alarm", ""+s);
+                Log.i("Alarm", "hey: " + s);
+
+            }
+        });
+*/
 
         setInfo();
 
@@ -115,8 +135,8 @@ public class FirstFragment extends Fragment {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
 
                 }
-                Log.i("Alarm","FirstFragment her! Setting Repeating" );
-                alarmCreateActivity.setRepeating();
+                alarmCreateActivity.resetAlarmNotification();
+
             }
         });
 
