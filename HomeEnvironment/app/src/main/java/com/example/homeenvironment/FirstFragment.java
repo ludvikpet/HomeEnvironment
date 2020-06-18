@@ -1,6 +1,7 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.SensorEventListener;
@@ -113,6 +114,57 @@ public class FirstFragment extends Fragment {
                 alarmCreateActivity.setRepeating();
             }
         });
+
+        view.findViewById(R.id.button_tempInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "tempInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_pressureInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "pressureInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_lightInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "lightInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_humidityInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "humidityInfo");
+                startActivity(popUp);
+            }
+        });
+
+        view.findViewById(R.id.button_noiseInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent popUp = new Intent(getActivity(), TipTextScreen.class);
+                popUp.putExtra("info/tip", "info");
+                popUp.putExtra("infoType", "noiseInfo");
+                startActivity(popUp);
+            }
+        });
+
     }
 
     /**
