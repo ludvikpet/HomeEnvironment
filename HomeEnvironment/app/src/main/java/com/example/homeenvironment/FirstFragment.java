@@ -49,27 +49,25 @@ public class FirstFragment extends Fragment {
     private TextView luxText, pressureText, humidityText, temperatureText, noiseLevelText;
     private NoiseLevel noiseLevel;
     private AlarmCreateActivity alarmCreateActivity;
-   // private SharedPreferences sharedPreferences;
+    // private SharedPreferences sharedPreferences;
     private SharedPreferences sharedPreferences;
     private WeatherRetriever weatherRetriever;
-    private boolean permissionMic, permissionLocation;
+    private boolean permissionMic;
+    private View mRootView;
+
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        if (mRootView == null)
+            mRootView = inflater.inflate(R.layout.fragment_first, container, false);
+        return mRootView;
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         permissionMic = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
-        permissionLocation = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED &&
-                ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED;
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mLightSensor = new AppLightSensor(view);
@@ -86,11 +84,10 @@ public class FirstFragment extends Fragment {
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
         weatherRetriever.getHumidity();
-        if(permissionMic){
+        if (permissionMic) {
             noiseLevel = new NoiseLevel(view);
-            Log.e("NOISE", ""+noiseLevel.isRunning());
+            Log.e("NOISE", " " + noiseLevel.isRunning());
         }
-        setInfo();
 /*
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -101,8 +98,6 @@ public class FirstFragment extends Fragment {
             }
         });
 */
-
-        setInfo();
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +110,7 @@ public class FirstFragment extends Fragment {
                 }
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
+
             }
         });
 
@@ -127,26 +123,26 @@ public class FirstFragment extends Fragment {
                 humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
 
                 //Switch between temperature measuring unit:
-                if(AppTemperatureSensor.temperatureMode.equals("true")) {
+                if (AppTemperatureSensor.temperatureMode.equals("true")) {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
-                }
-                else {
+                } else {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "℃"));
                 }
 
                 //Set correct noise level:
                 if (noiseLevel != null && noiseLevel.getNoiseLevel() < 0) {
-                    Log.e("NOISE", " "+ noiseLevel.getAmplitude());
+                    Log.e("NOISE", " " + noiseLevel.getAmplitude());
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
-                } else if (noiseLevel == null){
+                } else if (noiseLevel == null) {
                     noiseLevel = new NoiseLevel(view);
-                    if(noiseLevel.getNoiseLevel() > 0)noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-                }else {
+                    if (noiseLevel.getNoiseLevel() > 0)
+                        noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
+                } else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                 }
 
                 //Start alarm, if notifications are turned on:
-                if(sharedPreferences.getBoolean("notifications", false)) {
+                if (sharedPreferences.getBoolean("notifications", false)) {
                     alarmCreateActivity.resetAlarmNotification();
                 }
 
@@ -205,28 +201,28 @@ public class FirstFragment extends Fragment {
         startActivity(popUp);
     }
 
-    private Float getTemperature(){
+    private Float getTemperature() {
 
         float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
-       if(mTemperatureSensor.temperatureMode.equals("true")){
-           return (temp * 9/5 + 32);
-       }
-       else if(mTemperatureSensor.temperatureMode.equals("False")){
-           return (temp-32) * 5/9;
-       }
-       else return
-                   temp;
+        if (mTemperatureSensor.temperatureMode.equals("true")) {
+            return (temp * 9 / 5 + 32);
+        } else if (mTemperatureSensor.temperatureMode.equals("False")) {
+            return (temp - 32) * 5 / 9;
+        } else return
+                temp;
 
     }
-    private int getHumidity(){
+
+    private int getHumidity() {
         int humidity = (!(mBarometerSensor.hasHumiditySensor())) ? Integer.parseInt(weatherRetriever.getHumidity()) : mBarometerSensor.getHumidity();
         return humidity;
     }
+
     private void setInfo() {
         luxText.setText(getString(R.string.lightLevelInfo, 0));
         pressureText.setText(getString(R.string.pressureInfo, 0));
         humidityText.setText(getString(R.string.humidityInfo, 0));
-        if(mTemperatureSensor.temperatureMode.equals("true")){
+        if (mTemperatureSensor.temperatureMode.equals("true")) {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "F"));
         } else {
             temperatureText.setText(getString(R.string.tempInfo, 0.0, "℃"));
@@ -236,18 +232,19 @@ public class FirstFragment extends Fragment {
 
     /**
      * Calculates and sets the scale for the view
+     *
      * @param view the view that needs scaling
      */
 
-    private void setScale(View view){
+    private void setScale(View view) {
         int width = getResources().getConfiguration().screenWidthDp;
         int height = getResources().getConfiguration().screenHeightDp;
         float heightProduction = 800;
         float widthProduction = 480;
-        int calculatedWidth = (int) (width * (100/ widthProduction));
-        Log.i("TAG", "Width: " +calculatedWidth);
-        float textSize = height * (25 / heightProduction) ;
-        Log.i("TAG", "TextSize " + height*(25/heightProduction));
+        int calculatedWidth = (int) (width * (100 / widthProduction));
+        Log.i("TAG", "Width: " + calculatedWidth);
+        float textSize = height * (25 / heightProduction);
+        Log.i("TAG", "TextSize " + height * (25 / heightProduction));
         TextView luxTitle, pressureTitle, humidityTitle, temperatureTitle, noiseLevelTitle;
 
         luxTitle = view.findViewById(R.id.lightTextView);
@@ -265,15 +262,16 @@ public class FirstFragment extends Fragment {
 
     /**
      * Method to set the scaling on the TextViews
-     * @param luxTitle the title for the light level
-     * @param pressureTitle the title for the pressure
-     * @param humidityTitle the title for humidity
+     *
+     * @param luxTitle         the title for the light level
+     * @param pressureTitle    the title for the pressure
+     * @param humidityTitle    the title for humidity
      * @param temperatureTitle the title for the temperature
-     * @param noiseLevelTitle title for noise level
-     * @param textSize the calculated text size for the TextViews
-     * @param width the calculate width for the TextViews
+     * @param noiseLevelTitle  title for noise level
+     * @param textSize         the calculated text size for the TextViews
+     * @param width            the calculate width for the TextViews
      */
-    private void setTitles(TextView luxTitle, TextView pressureTitle, TextView humidityTitle, TextView temperatureTitle, TextView noiseLevelTitle, float textSize, int width){
+    private void setTitles(TextView luxTitle, TextView pressureTitle, TextView humidityTitle, TextView temperatureTitle, TextView noiseLevelTitle, float textSize, int width) {
         luxTitle.setTextSize(textSize);
         pressureTitle.setTextSize(textSize);
         humidityTitle.setTextSize(textSize);
@@ -288,23 +286,24 @@ public class FirstFragment extends Fragment {
 
     /**
      * Method to streamline setting the text size and width of the TextViews
+     *
      * @param textView which TextView that needs to get set
      * @param textSize calculated text size
-     * @param width calculated width
+     * @param width    calculated width
      */
-    private void setDimensions(TextView textView, float textSize, int width){
+    private void setDimensions(TextView textView, float textSize, int width) {
         textView.setTextSize(textSize);
         textView.setWidth(width);
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         Log.e("Noise ", "onPause() in fragment");
-        if(noiseLevel != null) {
+        if (noiseLevel != null) {
             try {
                 noiseLevel.stopRecorder();
-            } catch (RuntimeException stopException){
+            } catch (RuntimeException stopException) {
 
             }
         }
