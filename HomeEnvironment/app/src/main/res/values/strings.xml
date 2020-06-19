@@ -25,7 +25,7 @@
     <string name="title_activity_settings">Settings</string>
 
     <string name="tempInfo">%1$.1f %2$s</string>
-    <string name="lightLevelInfo">%1$d Lux</string>
+    <string name="lightLevelInfo">%1$d lx</string>
     <string name="noiseInfo">%1$.2f dB</string>
     <string name="humidityInfo">%1$d %%</string>
     <string name="pressureInfo">%1$d Pa</string>
@@ -61,6 +61,6 @@
     <string name="pressureInfoText">Ideal pressure is 985 Pa</string>
     <string name="lightInfoText">Ideal lux is 320-500 lx</string>
     <string name="humidityInfoText">Ideal humidity is 45% - 55%</string>
-    <string name="noiseInfoText">Ideal noise level is >60 dB</string>
+    <string name="noiseInfoText">Ideal noise level is less than 60 dB</string>
 
     </resources>

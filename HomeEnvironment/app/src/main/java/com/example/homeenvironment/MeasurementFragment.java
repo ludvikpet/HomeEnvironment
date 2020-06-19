@@ -136,7 +136,7 @@ public class MeasurementFragment extends Fragment {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                 }
 
-                setColor(noiseLevelText, (int) noiseLevel.getNoiseLevel());
+                setColor(noiseLevelText,  noiseLevel.getNoiseLevel());
 
                 //Start alarm, if notifications are turned on:
                 if (sharedPreferences.getBoolean("notifications", false)) {
@@ -293,7 +293,7 @@ public class MeasurementFragment extends Fragment {
         textView.setWidth(width);
     }
 
-    private void setColor(TextView textView, int value) {
+    private void setColor(TextView textView, double value) {
 
         //Temperature color:
         if(textView.equals(temperatureText)) {
