@@ -133,11 +133,10 @@ public class FirstFragment extends Fragment {
                 }
 
                 //Set correct noise level:
-                if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
+                if (noiseLevel != null && noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
-                    noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-
+                    if(noiseLevel != null) noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                 }
 
                 //Start alarm, if notifications are turned on:
