@@ -17,6 +17,31 @@ public class AlarmCreateActivity{
     private Context context;
     private SharedPreferences sharedPreferences;
 
+    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+            Log.i("Alarm", "Key: "+s);
+
+//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
+            if(s.equals("notifications")){
+                if(sharedPreferences.getBoolean(s,false)){
+                    resetAlarmNotification();
+                    Log.i("Alarm", "Restarted alarm");
+                }else{
+                    Log.i("Alarm", "Cancelled alarm");
+                    cancelAlarmNotification();
+                }
+            }
+            if(s.equals("time_interval")) {
+                if(sharedPreferences.getBoolean("notifications", false)) {
+                    resetAlarmNotification();
+                }
+            }
+
+        }
+    };
+
     public AlarmCreateActivity (View view){
         this.view = view;
         context = view.getContext();
@@ -24,29 +49,9 @@ public class AlarmCreateActivity{
         Intent alarmIntent = new Intent(view.getContext(),AlarmReceiver.class);
         receiverPendingIntent = PendingIntent.getBroadcast( context, 0, alarmIntent, 0);
 
-        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                Log.i("Alarm", "Key: "+s);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
 
-//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
-                if(s.equals("notifications")){
-                    if(sharedPreferences.getBoolean(s,false)){
-                        resetAlarmNotification();
-                        Log.i("Alarm", "Restarted alarm");
-                    }else{
-                        Log.i("Alarm", "Cancelled alarm");
-                        cancelAlarmNotification();
-                    }
-                }
-                if(s.equals("time_interval")) {
-                    if(sharedPreferences.getBoolean("notifications", false)) {
-                        resetAlarmNotification();
-                    }
-                }
 
-            }
-        });
 
 
     }
