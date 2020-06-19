@@ -117,9 +117,9 @@ public class Settings extends PreferenceActivity {
 
             Log.i("Pause", "Entered on pause!");
 
-            if(notificationsPref.isChecked()) {
+            if(!notificationsPref.isChecked()) {
                 Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-                boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_NO_CREATE) != null);
+                boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_UPDATE_CURRENT) != null);
                 Log.i("Pause", "Preference set to unchecked!");
 
                 if(alarmSet) {
@@ -127,7 +127,6 @@ public class Settings extends PreferenceActivity {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.cancel(pendingIntent);
                     Log.i("Pause", "Alarm has been cancelled!");
-
                 }
             }
         }
