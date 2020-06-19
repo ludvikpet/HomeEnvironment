@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:defaultValue="false">
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="notifications"
+            android:summaryOff="Notifications turned off"
+            android:summaryOn="Notifications turned on"
+            android:title="Notifications" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="temperature"
+            android:summaryOff="Celsius"
+            android:summaryOn="Fahrenheit"
+            android:title="Temperature unit" />
+
+        <ListPreference
+            android:entries="@array/reply_entries"
+            android:summary="Choose reminder interval"
+            android:defaultValue="halv time"
+            android:entryValues="@array/reply_values"
+            android:key="time_interval"
+            android:title="Reminder Alert"
+            />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

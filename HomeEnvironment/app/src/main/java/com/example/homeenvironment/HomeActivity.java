@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 startActivity(i);
+                finish();
             }
 
             @Override
