@@ -52,6 +52,7 @@ public class FirstFragment extends Fragment {
    // private SharedPreferences sharedPreferences;
     private SharedPreferences sharedPreferences;
     private WeatherRetriever weatherRetriever;
+    private boolean permissionMic, permissionLocation;
 
     @Override
     public View onCreateView(
@@ -65,6 +66,9 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        permissionMic = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
+        permissionLocation = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED &&
+                ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED;
         if(alarmCreateActivity == null){
             alarmCreateActivity = new AlarmCreateActivity(view);
         }
@@ -85,7 +89,7 @@ public class FirstFragment extends Fragment {
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
         weatherRetriever.getHumidity();
-        if(ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+        if(permissionMic){
             noiseLevel = new NoiseLevel(view);
             Log.e("NOISE", ""+noiseLevel.isRunning());
         }
