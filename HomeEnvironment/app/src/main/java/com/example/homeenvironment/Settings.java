@@ -43,11 +43,10 @@ public class Settings extends PreferenceActivity {
             addPreferencesFromResource(R.xml.root_preferences);
 
             timeInterval = (ListPreference) findPreference("time_interval");
-
             timeInterval.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    timeInterval.setSummary((String) newValue);
+                    timeInterval.setSummary("You will receive a notification " + (String) newValue);
                     timeInterval.setValue(newValue.toString());
                     return false;
                 }
