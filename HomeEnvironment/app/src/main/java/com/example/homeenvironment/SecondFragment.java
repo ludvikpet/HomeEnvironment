@@ -77,12 +77,6 @@ public class SecondFragment extends Fragment {
         private void initializePopUp(Intent popUp) {
         popUp.putExtra("info/tip", "tip");
         startActivity(popUp);
-        Random random = new Random();
-        int potentialWindMill = random.nextInt(25);
-        if(potentialWindMill < 1) {
-            Animatoo.animateSpin(getContext());
-        } else {
-            Animatoo.animateFade(getContext());
-        }
+
     }
 }

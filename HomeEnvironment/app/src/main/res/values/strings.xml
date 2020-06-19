@@ -51,10 +51,10 @@
     <string name="notification_Boolean">false</string>
     <string name="temperature_Boolean">false</string>
 
-    <string name="tempTipText">The ideal room temperature in an office space is around 22C or 72F. If your room is warmer than this, consider opening a few windows or using a fan. If your room is colder you might want to consider moving closer to a heat source and not opening any windows for extended periods of time.</string>
+    <string name="tempTipText">The ideal room temperature in an office space is around 22C or 72F. If your room is warmer than this, consider opening a few windows or using a fan. If your room is colder you might want to consider moving closer to a heat source and not opening any windows for extended periods of time. If your temperature seems odd, it might be because your phone lacks a thermometer, in which case the temperature of your geographical location was used by the app.</string>
     <string name="pressureTipText">The ideal level of pressure in an area fit for office work is around 985 Pa. If your area consistently has lower pressure, you might want to consider moving to a lower altitude when you work.</string>
     <string name="lightTipText">The ideal light level for your working space should be around 320-500 lx. Is it much brighter, consider rolling down some blinds or going to a more shaded area. Is it darker, turn on some lights or ideally you can get some sunlight by opening up your blinds.</string>
-    <string name="humidityTipText">Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level.</string>
+    <string name="humidityTipText">Ideally the humidity in your area should be around 45% - 55%. If the humidity deviates from this, you should look into getting a humidifier that can regulate your humidity level. If your humidity seems odd, it might be because your phone lacks a hygrometer, in which case the humidity of your geographical location was used by the app.</string>
     <string name="noiseTipText">The ideal noise level in your workspace should never exceed 60 dB. If the noise level of your working environment is consistently higher than 60 dB, consider moving to a quieter workspace or ask the people around you to quiet down.</string>
 
     <string name="tempInfoText">Ideal temperature is 22C/72F</string>
