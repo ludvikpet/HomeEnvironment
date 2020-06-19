@@ -14,15 +14,52 @@ public class AlarmCreateActivity{
     private AlarmManager alarmManager;
     private PendingIntent receiverPendingIntent;
     private View view;
+    private Context context;
     private SharedPreferences sharedPreferences;
 
+    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+            Log.i("Alarm", "Key: "+s);
+
+//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
+            if(s.equals("notifications")){
+                if(sharedPreferences.getBoolean(s,false)){
+                    resetAlarmNotification();
+                    Log.i("Alarm", "Restarted alarm");
+                }else{
+                    Log.i("Alarm", "Cancelled alarm");
+                    cancelAlarmNotification();
+                }
+            }
+            if(s.equals("time_interval")) {
+                if(sharedPreferences.getBoolean("notifications", false)) {
+                    resetAlarmNotification();
+                }
+            }
+
+        }
+    };
 
     public AlarmCreateActivity (View view){
         this.view = view;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-       Intent alarmIntent = new Intent(view.getContext(),AlarmReceiver.class);
-        receiverPendingIntent = PendingIntent.getBroadcast( view.getContext(), 0, alarmIntent, 0);
+        context = view.getContext();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Intent alarmIntent = new Intent(view.getContext(),AlarmReceiver.class);
+        receiverPendingIntent = PendingIntent.getBroadcast( context, 0, alarmIntent, 0);
 
+        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+
+
+
+
+    }
+
+    public AlarmCreateActivity (PendingIntent pendingIntent, Context context){
+        receiverPendingIntent = pendingIntent;
+        this.context = context;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -47,35 +84,35 @@ public class AlarmCreateActivity{
    
 
     private void startAlarmNotification(){
-        alarmManager =(AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        if (sharedPreferences.getString("time_interval", "halv time").equals("30 min")) {
+        if (sharedPreferences.getString("time_interval", "halv time").equals("every half hour")) {
             alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HALF_HOUR / 120,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 0.5t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("60 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("every hour")) {
             alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HOUR / 60,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 1t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("120 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("every 2 hours")) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HOUR * 2,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 2t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("180 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("every 3 hours")) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HOUR * 3,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 3t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("240 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("every 4 hours")) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HOUR * 4,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 4t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("300 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("every 5 hours")) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_HOUR * 5,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 5t");
         }
-        else if(sharedPreferences.getString("time_interval", "halv time").equals("1440 min")) {
+        else if(sharedPreferences.getString("time_interval", "halv time").equals("once every day")) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),AlarmManager.INTERVAL_DAY,receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----> 24t");
         }

@@ -27,6 +27,8 @@ public class Settings extends PreferenceActivity {
     public static SwitchPreference notificationsPref;
     public static ListPreference timeInterval;
     private final static String TAG = "Settings";
+    public static boolean notificationPrefChanged;
+    public static AlarmCreateActivity alarmCreateActivity;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -41,14 +43,23 @@ public class Settings extends PreferenceActivity {
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.root_preferences);
+            notificationPrefChanged = false;
 
-            timeInterval = (ListPreference) findPreference("time_interval");
+    }
+
+
+        @Override
+        public void onResume() {
+            super.onResume();
+
+            timeInterval = (android.preference.ListPreference) findPreference("time_interval");
             timeInterval.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    timeInterval.setSummary("You will receive a notification " + (String) newValue);
+                    timeInterval.setSummary((String) newValue);
                     timeInterval.setValue(newValue.toString());
-                    return false;
+                    notificationPrefChanged = true;
+                    return true;
                 }
             });
 
@@ -76,12 +87,14 @@ public class Settings extends PreferenceActivity {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-                                 
+
 
                     if (notificationsPref.isChecked()) {
+                        notificationPrefChanged = true;
                         notificationsPref.setChecked(false);
 
                     } else if (!notificationsPref.isChecked()) {
+                        notificationPrefChanged = false;
                         notificationsPref.setChecked(true);
                     }
 
@@ -91,43 +104,33 @@ public class Settings extends PreferenceActivity {
             });
         }
 
-    }
-
-
-        @Override
-        public void onResume() {
-            super.onResume();
-
-/**
- SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Settings.this);
- boolean test = preferences.getBoolean("test", false);
-
- if (test) {
- testPref.setSummary("Enabled");
- } else {
- testPref.setSummary("Disabled");
- }
- */
         }
 
         @Override
         public void onPause() {
             super.onPause();
-
+            /*
             Log.i("Pause", "Entered on pause!");
 
-            if(!notificationsPref.isChecked()) {
-                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-                boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_UPDATE_CURRENT) != null);
-                Log.i("Pause", "Preference set to unchecked!");
+            if(notificationPrefChanged) {
+                    Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_UPDATE_CURRENT) != null);
+                    Log.i("Pause", "Preference set to unchecked!");
 
-                if(alarmSet) {
+                    if(alarmSet) {
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0);
+                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                        alarmManager.cancel(pendingIntent);
+                        Log.i("Alarm", "Alarm has been cancelled!");
+                    }
+            } else if(!notificationPrefChanged) {
+                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0);
-                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                alarmManager.cancel(pendingIntent);
-                    Log.i("Pause", "Alarm has been cancelled!");
-                }
-            }
+                alarmCreateActivity = new AlarmCreateActivity(pendingIntent, getApplicationContext());
+                alarmCreateActivity.resetAlarmNotification();
+                Log.i("Alarm", "Reset alarm successfully!");
+            }*/
+
         }
 
 }

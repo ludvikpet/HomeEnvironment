@@ -69,9 +69,6 @@ public class FirstFragment extends Fragment {
         permissionMic = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
         permissionLocation = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED &&
                 ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED;
-        if(alarmCreateActivity == null){
-            alarmCreateActivity = new AlarmCreateActivity(view);
-        }
         //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());

@@ -6,5 +6,8 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="tip_pop_up_boarder">#0E3571</color>
+    <color name="yellow_measure">#C3BB20</color>
+    <color name="red_measure">#BD0808</color>
+    <color name="green_measure">#309814</color>
 
 </resources>
