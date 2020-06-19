@@ -20,7 +20,7 @@
         <ListPreference
             android:entries="@array/reply_entries"
             android:summary="Choose reminder interval"
-            android:defaultValue="halv time"
+            android:defaultValue="true"
             android:entryValues="@array/reply_values"
             android:key="time_interval"
             android:title="Reminder Alert"

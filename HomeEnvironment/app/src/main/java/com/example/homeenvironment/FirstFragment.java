@@ -65,9 +65,6 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(alarmCreateActivity == null){
-            alarmCreateActivity = new AlarmCreateActivity(view);
-        }
         //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
