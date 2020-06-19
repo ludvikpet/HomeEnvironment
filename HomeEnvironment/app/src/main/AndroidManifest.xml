@@ -29,7 +29,10 @@
             </intent-filter>
 
         </activity>
-
+        <activity android:name=".SecondFragment"
+            android:screenOrientation="portrait"
+            android:label="SecondFragment">
+            ></activity>
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings">

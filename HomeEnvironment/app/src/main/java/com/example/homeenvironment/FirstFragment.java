@@ -43,6 +43,11 @@ public class FirstFragment extends Fragment {
     private NoiseLevel noiseLevel;
     private SharedPreferences sharedPreferences;
     private WeatherRetriever weatherRetriever;
+<<<<<<< Updated upstream
+=======
+    private boolean permissionMic, permissionLocation;
+    private View view;
+>>>>>>> Stashed changes
 
     @Override
     public View onCreateView(
@@ -55,6 +60,7 @@ public class FirstFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        this.view = view;
         super.onViewCreated(view, savedInstanceState);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -68,6 +74,7 @@ public class FirstFragment extends Fragment {
         humidityText = view.findViewById(R.id.humidityID);
         temperatureText = view.findViewById(R.id.temperatureID);
         noiseLevelText = view.findViewById(R.id.noiseID);
+
         setScale(view);
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
@@ -84,11 +91,16 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     noiseLevel.stopRecorder();
+<<<<<<< Updated upstream
                 } catch (RuntimeException stopException) {
+=======
+
+                }catch (RuntimeException e){
+>>>>>>> Stashed changes
 
                 }
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                Intent i = new Intent(getContext(), SecondFragment.class);
+                startActivity(i);
             }
         });
 
@@ -123,6 +135,39 @@ public class FirstFragment extends Fragment {
             }
         });
     }
+<<<<<<< Updated upstream
+=======
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        Log.e("arbitrary", "It's saved");
+        savedInstanceState.putString("tempText",  temperatureText.getText().toString());
+        savedInstanceState.putString("luxText",  luxText.getText().toString());
+        savedInstanceState.putString("pressureText",  pressureText.getText().toString());
+        savedInstanceState.putString("humidityText",  humidityText.getText().toString());
+        savedInstanceState.putString("noiseText",  noiseLevelText.getText().toString());
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        Log.e("arbitrary", "Well, this runs. Something's fishy.");
+        if(savedInstanceState != null){
+            luxText.setText(savedInstanceState.getString("luxText"));
+            pressureText.setText(savedInstanceState.getString("pressureText"));
+            humidityText.setText(savedInstanceState.getString("humidityText"));
+            temperatureText.setText(savedInstanceState.getString("tempText"));
+            noiseLevelText.setText(savedInstanceState.getString("noiseText"));
+            noiseLevel = new NoiseLevel(this.view);
+            noiseLevel.startRecorder();
+        }
+    }
+
+    private void initializePopUp(Intent popUp) {
+        popUp.putExtra("info/tip", "info");
+        startActivity(popUp);
+    }
+
+>>>>>>> Stashed changes
     private Float getTemperature(){
 
         Float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();

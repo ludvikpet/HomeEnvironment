@@ -77,6 +77,7 @@ public class NoiseLevel extends AppCompatActivity {
         stopRecorder();
     }
 
+<<<<<<< Updated upstream
     public void startRecorder() {
         if (mRecorder == null && permission) {
             mRecorder = new MediaRecorder();
@@ -99,6 +100,26 @@ public class NoiseLevel extends AppCompatActivity {
                 Log.i("Security ", "SecurityException: " + android.util.Log.getStackTraceString(e));
             }
 
+=======
+    /**
+     * Starts the recorder and checks that there isn't already a mRecorder
+     */
+    public void startRecorder() {
+        if(mRecorder == null){
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(fileName);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(TAG_noise, "prepare() failed");
+        }
+        isRunning = true;
+        mRecorder.start();
+>>>>>>> Stashed changes
         }
 
     }
