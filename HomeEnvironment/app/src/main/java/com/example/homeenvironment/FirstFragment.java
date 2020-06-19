@@ -123,19 +123,26 @@ public class FirstFragment extends Fragment {
                 luxText.setText(getString(R.string.lightLevelInfo, mLightSensor.getLux()));
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
+
+                //Switch between temperature measuring unit:
                 if(AppTemperatureSensor.temperatureMode.equals("true")) {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 }
                 else {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "℃"));
                 }
-                if (noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
+
+                //Set correct noise level:
+                if (noiseLevel != null && noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
-                    noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-
+                    if(noiseLevel != null) noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                 }
-                alarmCreateActivity.resetAlarmNotification();
+
+                //Start alarm, if notifications are turned on:
+                if(sharedPreferences.getBoolean("notifications", false)) {
+                    alarmCreateActivity.resetAlarmNotification();
+                }
 
             }
         });

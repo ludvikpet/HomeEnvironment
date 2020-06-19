@@ -82,7 +82,7 @@ public class NoiseLevel extends AppCompatActivity {
             Log.e(TAG_noise, "prepare() failed");
         }
         isRunning = true;
-        mRecorder.start();
+      //  mRecorder.start();
         }
     }
 

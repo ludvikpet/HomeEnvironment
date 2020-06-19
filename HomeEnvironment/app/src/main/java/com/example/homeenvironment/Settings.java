@@ -1,5 +1,7 @@
 package com.example.homeenvironment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -23,13 +25,8 @@ public class Settings extends PreferenceActivity {
 
     public static SwitchPreference tempPref;
     public static SwitchPreference notificationsPref;
-    public static SwitchPreference interval;
-    private String timeInterval;
+    public static ListPreference timeInterval;
     private final static String TAG = "Settings";
-    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        }
-    };
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -44,6 +41,16 @@ public class Settings extends PreferenceActivity {
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.root_preferences);
+
+            timeInterval = (ListPreference) findPreference("time_interval");
+            timeInterval.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    timeInterval.setSummary("You will receive a notification " + (String) newValue);
+                    timeInterval.setValue(newValue.toString());
+                    return false;
+                }
+            });
 
             // Temperature switch
             tempPref = (android.preference.SwitchPreference) findPreference("temperature");
@@ -72,11 +79,9 @@ public class Settings extends PreferenceActivity {
                                  
 
                     if (notificationsPref.isChecked()) {
-
                         notificationsPref.setChecked(false);
 
                     } else if (!notificationsPref.isChecked()) {
-
                         notificationsPref.setChecked(true);
                     }
 
@@ -103,6 +108,26 @@ public class Settings extends PreferenceActivity {
  testPref.setSummary("Disabled");
  }
  */
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+
+            Log.i("Pause", "Entered on pause!");
+
+            if(!notificationsPref.isChecked()) {
+                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+                boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_UPDATE_CURRENT) != null);
+                Log.i("Pause", "Preference set to unchecked!");
+
+                if(alarmSet) {
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.cancel(pendingIntent);
+                    Log.i("Pause", "Alarm has been cancelled!");
+                }
+            }
         }
 
 }
