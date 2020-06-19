@@ -22,6 +22,7 @@ public class TipTextScreen extends Activity {
     TextView tipText;
     String type;
     ConstraintLayout tipLayout;
+    int width, height;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -35,8 +36,8 @@ public class TipTextScreen extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
+        width = dm.widthPixels;
+        height = dm.heightPixels;
 
         tipText = (TextView) findViewById(id.textview_the_tip);
 
@@ -69,6 +70,7 @@ public class TipTextScreen extends Activity {
     private void getTheTip(String type) {
         switch (type) {
             case "tempTip":
+                getWindow().setLayout((int) (width * .8), (int) (height * .72));
                 tipText.setText(string.tempTipText);
                 break;
             case "pressureTip":
@@ -78,6 +80,7 @@ public class TipTextScreen extends Activity {
                 tipText.setText(string.lightTipText);
                 break;
             case "humidityTip":
+                getWindow().setLayout((int) (width * .8), (int) (height * .6));
                 tipText.setText(string.humidityTipText);
                 break;
             case "noiseTip":
