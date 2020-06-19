@@ -56,7 +56,7 @@ public class AlarmCreateActivity{
         Log.i("Alarm",""+ newInterval.length);
         String text = "";
         for(int i=0;i<newInterval.length;i++){
-            text = text + newInterval[i];
+            text = text +" " + newInterval[i];
         }
         Log.i("Alarm", "" + text);
         if(newInterval[1].equals("half")){
@@ -76,7 +76,7 @@ public class AlarmCreateActivity{
         alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),repeatInterval,receiverPendingIntent);
 
-        Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "halv time"));
+        Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "every half hour"));
     }
     private void cancelAlarmNotification(){
         if(alarmManager != null){
