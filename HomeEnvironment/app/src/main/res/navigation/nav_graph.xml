@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.homeenvironment.FirstFragment"
+        android:name="com.example.homeenvironment.MeasurementFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.homeenvironment.SecondFragment"
+        android:name="com.example.homeenvironment.TipFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

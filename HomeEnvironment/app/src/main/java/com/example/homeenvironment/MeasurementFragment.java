@@ -1,45 +1,30 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.viewpager.widget.ViewPager;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
 
-import java.util.Random;
-
-import static android.content.Context.SENSOR_SERVICE;
-import static android.hardware.Sensor.TYPE_AMBIENT_TEMPERATURE;
-
-import java.time.Instant;
-
-public class FirstFragment extends Fragment {
+public class MeasurementFragment extends Fragment {
     private AppLightSensor mLightSensor;
     private AppBarometerSensor mBarometerSensor;
     private AppTemperatureSensor mTemperatureSensor;
@@ -108,7 +93,7 @@ public class FirstFragment extends Fragment {
                     Log.i("NOISE ", "stopRecording() failed");
 
                 }
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(MeasurementFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
 
             }
@@ -122,24 +107,36 @@ public class FirstFragment extends Fragment {
                 pressureText.setText(getString(R.string.pressureInfo, mBarometerSensor.getPressure()));
                 humidityText.setText(getString(R.string.humidityInfo, getHumidity()));
 
+                //Set color values:
+                setColor(luxText, mLightSensor.getLux());
+                setColor(pressureText, mBarometerSensor.getPressure());
+                setColor(humidityText, getHumidity());
+                setColor(temperatureText, getTemperature().intValue());
+
                 //Switch between temperature measuring unit:
                 if (AppTemperatureSensor.temperatureMode.equals("true")) {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "F"));
                 } else {
                     temperatureText.setText(getString(R.string.tempInfo, getTemperature(), "℃"));
+
                 }
 
                 //Set correct noise level:
                 if (noiseLevel != null && noiseLevel.getNoiseLevel() < 0) {
                     Log.e("NOISE", " " + noiseLevel.getAmplitude());
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
-                } else if (noiseLevel == null) {
+
+                } else if (noiseLevel == null){
                     noiseLevel = new NoiseLevel(view);
-                    if (noiseLevel.getNoiseLevel() > 0)
+
+                    if(noiseLevel.getNoiseLevel() > 0) {
                         noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
-                } else {
+                    }
+                }else {
                     noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
                 }
+
+                setColor(noiseLevelText, (int) noiseLevel.getNoiseLevel());
 
                 //Start alarm, if notifications are turned on:
                 if (sharedPreferences.getBoolean("notifications", false)) {
@@ -294,6 +291,103 @@ public class FirstFragment extends Fragment {
     private void setDimensions(TextView textView, float textSize, int width) {
         textView.setTextSize(textSize);
         textView.setWidth(width);
+    }
+
+    private void setColor(TextView textView, int value) {
+
+        //Temperature color:
+        if(textView.equals(temperatureText)) {
+
+            if(mTemperatureSensor.temperatureMode.equals("true")) {
+
+                if(value >= 68 && value <= 74.3) {
+                    temperatureText.setTextColor(getResources().getColor(R.color.green_measure));
+
+                } else if(value >= 68 && value <= 74.3) {
+                    temperatureText.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+                } else {
+                    temperatureText.setTextColor(getResources().getColor(R.color.red_measure));
+
+                }
+
+            } else {
+
+                if(value >= 21.5 && value <= 22.5) {
+                    temperatureText.setTextColor(getResources().getColor(R.color.green_measure));
+
+                } else if(value >= 20 && value <= 23.5) {
+                    temperatureText.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+                } else {
+                    temperatureText.setTextColor(getResources().getColor(R.color.red_measure));
+
+                }
+
+            }
+
+        }
+
+        //Pressure color:
+        else if(textView.equals(pressureText)) {
+            //mBarometerSensor.getPressure()
+            if(value >= 950  && value <= 1050) {
+                textView.setTextColor(getResources().getColor(R.color.green_measure));
+
+            } else if(value >= 900 && value <= 1100) {
+                textView.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+            } else {
+                textView.setTextColor(getResources().getColor(R.color.red_measure));
+
+            }
+        }
+
+        else if(textView.equals(luxText)) {
+
+            if(value >= 300  && value <= 500) {
+                textView.setTextColor(getResources().getColor(R.color.green_measure));
+
+            } else if(value >= 250 && value <= 550) {
+                textView.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+            } else {
+                textView.setTextColor(getResources().getColor(R.color.red_measure));
+
+            }
+        }
+
+        else if(textView.equals(humidityText)) {
+
+            if(value >= 45  && value <= 55) {
+                textView.setTextColor(getResources().getColor(R.color.green_measure));
+
+            } else if(value >= 20 && value <= 70) {
+                textView.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+            } else {
+                textView.setTextColor(getResources().getColor(R.color.red_measure));
+
+            }
+
+        }
+
+        else if(textView.equals(noiseLevelText)) {
+
+            if(value < 60) {
+                textView.setTextColor(getResources().getColor(R.color.green_measure));
+
+            } else if(value >= 60  && value <= 65) {
+                textView.setTextColor(getResources().getColor(R.color.yellow_measure));
+
+            } else {
+                textView.setTextColor(getResources().getColor(R.color.red_measure));
+
+            }
+
+        }
+
+
     }
 
     @Override
