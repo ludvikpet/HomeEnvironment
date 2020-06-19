@@ -56,33 +56,6 @@ public class AlarmCreateActivity{
 
     }
 
-    public AlarmCreateActivity (PendingIntent pendingIntent, Context context){
-        receiverPendingIntent = pendingIntent;
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                Log.i("Alarm", ""+s);
-
-//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
-                if(s.equals("notifications")){
-                    if(sharedPreferences.getBoolean(s,false)){
-                        startAlarmNotification();
-                        Log.i("Alarm", "Restarted alarm");
-                    }else{
-                        Log.i("Alarm", "Cancelled alarm");
-                        cancelAlarmNotification();
-                    }
-                }
-
-            }
-        });
-
-
-    }
-   
-
     private void startAlarmNotification(){
         alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
