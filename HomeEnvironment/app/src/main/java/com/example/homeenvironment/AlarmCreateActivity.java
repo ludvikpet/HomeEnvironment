@@ -55,6 +55,7 @@ public class AlarmCreateActivity{
 
 
     }
+<<<<<<< Updated upstream
 
     public AlarmCreateActivity (PendingIntent pendingIntent, Context context){
         receiverPendingIntent = pendingIntent;
@@ -79,6 +80,25 @@ public class AlarmCreateActivity{
             }
         });
 
+=======
+    private  long setRepeatInterval() {
+        String[] newInterval = sharedPreferences.getString("time_interval","every half hour").split(" ");
+        Log.i("Alarm",""+ newInterval.length);
+        String text = "";
+        for(int i=0;i<newInterval.length;i++){
+            text = text +" " + newInterval[i];
+        }
+        Log.i("Alarm", "" + text);
+        if(newInterval[1].equals("half")){
+           return AlarmManager.INTERVAL_HALF_HOUR;
+        }else if(newInterval[1].equals("hour")){
+            return AlarmManager.INTERVAL_HOUR;
+        }else if(newInterval[1].equals("every")){
+            return AlarmManager.INTERVAL_DAY;
+        }else{
+            return AlarmManager.INTERVAL_HOUR * Integer.parseInt(newInterval[1]);
+        }
+>>>>>>> Stashed changes
 
     }
    
