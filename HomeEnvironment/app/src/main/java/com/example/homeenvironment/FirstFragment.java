@@ -85,8 +85,10 @@ public class FirstFragment extends Fragment {
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
         weatherRetriever.getHumidity();
+        if(ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
             noiseLevel = new NoiseLevel(view);
             Log.e("NOISE", ""+noiseLevel.isRunning());
+        }
         setInfo();
 /*
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
