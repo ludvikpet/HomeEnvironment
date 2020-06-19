@@ -85,9 +85,8 @@ public class FirstFragment extends Fragment {
         weatherRetriever = new WeatherRetriever(view);
         weatherRetriever.setWeather(view);
         weatherRetriever.getHumidity();
-        if (ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED) {
             noiseLevel = new NoiseLevel(view);
-        }
+            Log.e("NOISE", ""+noiseLevel.isRunning());
         setInfo();
 /*
         sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -134,6 +133,7 @@ public class FirstFragment extends Fragment {
 
                 //Set correct noise level:
                 if (noiseLevel != null && noiseLevel.soundDb(10 * Math.exp(-3)) < 0) {
+                    Log.e("NOISE", " "+ noiseLevel.getAmplitude());
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
                 } else {
                     if(noiseLevel != null) noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));

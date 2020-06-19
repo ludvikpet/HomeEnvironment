@@ -39,14 +39,11 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
-    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        fragmentManager = getSupportFragmentManager();
-
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
