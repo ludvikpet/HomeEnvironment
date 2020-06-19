@@ -28,7 +28,7 @@ public class AlarmCreateActivity{
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
                 Log.i("Alarm", ""+s);
 
-                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
+//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
                 if(s.equals("notifications")){
                     if(sharedPreferences.getBoolean(s,false)){
                         startAlarmNotification();
