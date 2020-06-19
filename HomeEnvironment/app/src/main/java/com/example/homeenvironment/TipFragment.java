@@ -16,7 +16,7 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
 import java.util.Random;
 
-public class SecondFragment extends Fragment {
+public class TipFragment extends Fragment {
 
     @Override
     public View onCreateView(
