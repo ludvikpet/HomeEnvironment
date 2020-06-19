@@ -23,7 +23,7 @@ import java.util.Date;
 public class AlarmReceiver extends BroadcastReceiver {
 
 
-    private static final String TAG = "Alarm";
+    private static final String TAG = "AlarmNoti";
     // Notification ID to allow for future updates
     private static final int NOTIFICATION_ID = 1;
 
