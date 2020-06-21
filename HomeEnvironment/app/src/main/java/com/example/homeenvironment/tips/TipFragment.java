@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.homeenvironment.R;
 
+//Denne klasse står for den side af vores app som indeholder en masse knapper man kan klikke på, for at få nogle tips.
 public class TipFragment extends Fragment {
 
     @Override
@@ -20,13 +21,14 @@ public class TipFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        return inflater.inflate(R.layout.fragment_tips, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+//Her sættes der onClickListeners på alle knapperne på skærmen. Desuden sendes der en extra som
+// fortæller hvilken knap der blev klikket på når en tip dialog skal vises.
         view.findViewById(R.id.button_temperature_tip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

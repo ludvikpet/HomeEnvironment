@@ -16,7 +16,8 @@ import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 
 import static com.example.homeenvironment.R.*;
 
-
+//Denne klasse står for at vise de små tip- og infobokse som popper op når brugeren klikker på
+//bestemte knapper.
 public class TipTextScreen extends Activity {
 
     TextView tipText;
@@ -29,10 +30,9 @@ public class TipTextScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(layout.activity_tiptextscreen);
 
+        //Her fås telefonens skærmstørrelse.
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -43,6 +43,7 @@ public class TipTextScreen extends Activity {
 
         tipLayout = (ConstraintLayout) findViewById(id.tiptextscreen_layout);
 
+        //Når man klikker på popupvinduet skal det lukkes.
         tipLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +51,7 @@ public class TipTextScreen extends Activity {
             }
         });
 
+        //Her trækkes informationen om hvilket tip/info der skal vises på skærmen, ud af intentet.
         if(tipText != null){
             Intent intent = getIntent();
             String decider = intent.getStringExtra("info/tip");
@@ -66,7 +68,7 @@ public class TipTextScreen extends Activity {
         }
     }
 
-
+    //De to følgende klasser viser den korrekte tekst for de givne tips/info
     private void getTheTip(String type) {
         switch (type) {
             case "tempTip":
