@@ -60,8 +60,6 @@ public class NoiseLevel extends AppCompatActivity {
     private void onRecord(boolean start) {
         if (start) {
             startRecorder();
-        } else {
-            stopRecorder();
         }
     }
 

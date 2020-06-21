@@ -39,6 +39,7 @@ public class MeasurementFragment extends Fragment {
     private WeatherRetriever weatherRetriever;
     private boolean permissionMic;
     private View mRootView;
+    private float currentNoiseLevel;
 
 
     @Override
@@ -71,6 +72,7 @@ public class MeasurementFragment extends Fragment {
         weatherRetriever.getHumidity();
         if (permissionMic) {
             noiseLevel = new NoiseLevel(view);
+            currentNoiseLevel = noiseLevel.getNoiseLevel();
             Log.e("NOISE", " " + noiseLevel.isRunning());
         }
 /*
@@ -122,21 +124,23 @@ public class MeasurementFragment extends Fragment {
                 }
 
                 //Set correct noise level:
-                if (noiseLevel != null && noiseLevel.getNoiseLevel() < 0) {
+                currentNoiseLevel = noiseLevel.getNoiseLevel();
+                if (noiseLevel != null && currentNoiseLevel < 0) {
                     Log.e("NOISE", " " + noiseLevel.getAmplitude());
                     noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
 
                 } else if (noiseLevel == null){
                     noiseLevel = new NoiseLevel(view);
 
-                    if(noiseLevel.getNoiseLevel() > 0) {
-                        noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
+                    if(currentNoiseLevel > 0) {
+                        noiseLevelText.setText(getString(R.string.noiseInfo, currentNoiseLevel));
                     }
                 }else {
-                    noiseLevelText.setText(getString(R.string.noiseInfo, noiseLevel.getNoiseLevel()));
+                    noiseLevelText.setText(getString(R.string.noiseInfo, currentNoiseLevel));
                 }
+                Log.e("NOISE", "Current Noise Level: " + currentNoiseLevel);
 
-                setColor(noiseLevelText,  noiseLevel.getNoiseLevel());
+                setColor(noiseLevelText,  currentNoiseLevel);
 
                 //Start alarm, if notifications are turned on:
                 if (sharedPreferences.getBoolean("notifications", false)) {
@@ -374,10 +378,10 @@ public class MeasurementFragment extends Fragment {
 
         else if(textView.equals(noiseLevelText)) {
 
-            if(value < 60) {
+            if(value < 60.0) {
                 textView.setTextColor(getResources().getColor(R.color.green_measure));
 
-            } else if(value >= 60  && value <= 65) {
+            } else if(value >= 60.0  && value <= 65.0) {
                 textView.setTextColor(getResources().getColor(R.color.yellow_measure));
 
             } else {
