@@ -26,7 +26,7 @@ public class AlarmCreateActivity{
 //                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
             if(s.equals("notifications")){
                 if(sharedPreferences.getBoolean(s,false)){
-                    resetAlarmNotification();
+                    startAlarmNotification();
                     Log.i("Alarm", "Restarted alarm");
                 }else{
                     Log.i("Alarm", "Cancelled alarm");
