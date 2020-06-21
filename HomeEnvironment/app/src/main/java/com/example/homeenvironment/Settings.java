@@ -20,7 +20,7 @@ public class Settings extends PreferenceActivity {
     public static ListPreference timeInterval;
     private final static String TAG = "Settings";
     public static boolean notificationPrefChanged;
-    public static AlarmCreateActivity alarmCreateActivity;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -97,32 +97,4 @@ public class Settings extends PreferenceActivity {
         }
 
         }
-
-        @Override
-        public void onPause() {
-            super.onPause();
-            /*
-            Log.i("Pause", "Entered on pause!");
-
-            if(notificationPrefChanged) {
-                    Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-                    boolean alarmSet = (PendingIntent.getBroadcast(getApplicationContext(), 1, i, PendingIntent.FLAG_UPDATE_CURRENT) != null);
-                    Log.i("Pause", "Preference set to unchecked!");
-
-                    if(alarmSet) {
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0);
-                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        alarmManager.cancel(pendingIntent);
-                        Log.i("Alarm", "Alarm has been cancelled!");
-                    }
-            } else if(!notificationPrefChanged) {
-                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, i, 0);
-                alarmCreateActivity = new AlarmCreateActivity(pendingIntent, getApplicationContext());
-                alarmCreateActivity.resetAlarmNotification();
-                Log.i("Alarm", "Reset alarm successfully!");
-            }*/
-
-        }
-
 }

@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -49,8 +50,9 @@ public class AlarmCreateActivity{
         receiverPendingIntent = PendingIntent.getBroadcast( context, 0, alarmIntent, 0);
 
         sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
-
     }
+
+
     private  long setRepeatInterval(){
         String[] newInterval = sharedPreferences.getString("time_interval","every half hour").split(" ");
         Log.i("Alarm",""+ newInterval.length);
@@ -73,8 +75,8 @@ public class AlarmCreateActivity{
 
     private void startAlarmNotification(){
         alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,System.currentTimeMillis(),repeatInterval,receiverPendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), repeatInterval,receiverPendingIntent);
 
         Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "every half hour"));
     }
