@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Sensors;
 
 import android.Manifest;
 import android.content.Context;
@@ -40,7 +40,8 @@ public class WeatherRetriever {
     String humidity;
     Location location;
 
-    //Første string er URL som string, sidste string er return typen.
+    //Første parameter : string er URL som string, sidste string er return typen.
+    //Bruges til at konvertere data fra nettet til noget brugbart.
     class Weather extends AsyncTask<String, Void, String> {
 
         @Override
@@ -75,6 +76,8 @@ public class WeatherRetriever {
 
     }
 
+
+    //En nedarvning fra LocationListener. Bruges til at
     private class CityListener implements LocationListener {
         View view;
 
@@ -107,19 +110,20 @@ public class WeatherRetriever {
 
     public WeatherRetriever(View view) {
         Context context = view.getContext();
+        //LocationManager skal bruges til at finde brugerens lokation senere.
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
         this.cityListener = new CityListener(view);
         if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED ) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 1, cityListener);
         } else {
-            Log.i("WeatherRetriever", "What are you thinking? That's illegal! ");
+            Log.i("WeatherRetriever", "GPS usage hasn't been allowed. ");
         }
 
 
-        //Log.i("WeatherRetriever", "End of method");
     }
 
-    //Hvis humidity eller temperatur er null, så betyder det at brugeren ikke befinder sig i en by. Returner "base" værdi.
+    //Hvis humidity eller temperatur er null, så betyder det at programmet ikke associerer brugerens position med en by, eller at noget er gået galt. Returner "base" værdi.
     public String getHumidity()  {
         Log.i("WeatherRetriever", "This is the humidity " + humidity);
         if(humidity == null) return ""+0;
@@ -132,13 +136,14 @@ public class WeatherRetriever {
         if(temperature == null) return ""+0;
         else return temperature;
     }
-
+    //Bruges til at hente brugerens lokation, samt finde luftfugtighed og temperatur af brugerens by.
     public void setWeather(View view) {
         if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(view.getContext(),"That isn't allowed", Toast.LENGTH_LONG);
         }else{
 
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            //Bruger en Geocoder for at konvertere længde og breddegrad til en by.
             Geocoder gcd = new Geocoder(view.getContext(), Locale.US);
             List<Address> addresses;
             try {
@@ -146,8 +151,8 @@ public class WeatherRetriever {
                 addresses = gcd.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (addresses.size() > 0) {
                     System.out.println(addresses.get(0).getLocality());
+                    //cityname bliver fundet ved brugerens adresse, fundet ved Geocoder.
                     this.cityName = addresses.get(0).getLocality();
-                    //Log.i("WeatherRetriever", "This is the city's name " + cityName);
                 }
                 }
             } catch (IOException e) {
@@ -164,7 +169,8 @@ public class WeatherRetriever {
                  Problemet kan eventuelt løses ved at finde en anden måde at hente vejdata som ikke er afhængig af byer, men dette er udenfor ekspertise samt tidsbudget.
                 */
                  if(this.cityName == null) return;
-                //Log.i("WeatherRetriever", "final city name: "+cityName);
+                 //Vejr data bliver fundet ved en API der bruger byens navn som parameter. Dataen bliver formateret som et JSON objekt, der bliver fortolket af os.
+
                 content = weather.execute("https://openweathermap.org/data/2.5/weather?q="+cityName+"&appid=439d4b804bc8187953eb36d2a8c26a02").get();
                 JSONObject json = new JSONObject(content);
                 JSONObject jsonMain = new JSONObject(json.getString("main"));

@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Alarm;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -16,6 +16,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import com.example.homeenvironment.MainActivity;
+import com.example.homeenvironment.R;
 
 import java.text.DateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.tips;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.example.homeenvironment.R;
 
 //Denne klasse står for den side af vores app som indeholder en masse knapper man kan klikke på, for at få nogle tips.
 public class TipFragment extends Fragment {

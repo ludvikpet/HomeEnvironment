@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.tips;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
