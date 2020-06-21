@@ -45,7 +45,7 @@ public class MeasurementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (mRootView == null)
-            mRootView = inflater.inflate(R.layout.fragment_first, container, false);
+            mRootView = inflater.inflate(R.layout.fragment_measurement, container, false);
         return mRootView;
 
     }
@@ -145,7 +145,8 @@ public class MeasurementFragment extends Fragment {
 
             }
         });
-
+        //Sæt onClickListeners på alle informationsknapperne på siden og sørg for at den
+        //rigtige information bliver sendt afsted til tekstviewet
         view.findViewById(R.id.button_tempInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
