@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.homeenvironment.MeasurementFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_measurement">
 
         <action
         android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -20,9 +20,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.homeenvironment.TipFragment"
+        android:name="com.example.homeenvironment.tips.TipFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_tips">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/TipTextScreen"
-        android:name="com.example.homeenvironment.TipTextScreen"
+        android:name="com.example.homeenvironment.tips.TipTextScreen"
         android:label="@string/TipTextScreen_label"
         tools:layout="@layout/activity_tiptextscreen">
 

@@ -19,10 +19,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.homeenvironment.Alarm.AlarmCreateActivity;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
 import com.example.homeenvironment.Sensors.NoiseLevel;
+import com.example.homeenvironment.Sensors.WeatherRetriever;
+import com.example.homeenvironment.tips.TipTextScreen;
 
 public class MeasurementFragment extends Fragment {
     private AppLightSensor mLightSensor;
@@ -46,7 +49,7 @@ public class MeasurementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (mRootView == null)
-            mRootView = inflater.inflate(R.layout.fragment_first, container, false);
+            mRootView = inflater.inflate(R.layout.fragment_measurement, container, false);
         return mRootView;
 
     }
@@ -75,16 +78,6 @@ public class MeasurementFragment extends Fragment {
             currentNoiseLevel = noiseLevel.getNoiseLevel();
             Log.e("NOISE", " " + noiseLevel.isRunning());
         }
-/*
-        sharedPreferences.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
-            @Override
-            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-                Log.i("Alarm", ""+s);
-                Log.i("Alarm", "hey: " + s);
-
-            }
-        });
-*/
 
         view.findViewById(R.id.tipsButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +142,8 @@ public class MeasurementFragment extends Fragment {
 
             }
         });
-
+        //Sæt onClickListeners på alle informationsknapperne på siden og sørg for at den
+        //rigtige information bliver sendt afsted til tekstviewet
         view.findViewById(R.id.button_tempInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,10 +201,7 @@ public class MeasurementFragment extends Fragment {
         float temp = (!(mTemperatureSensor.hasTemperatureSensor())) ? Float.parseFloat(weatherRetriever.getTemperature()) : mTemperatureSensor.getTemperature();
         if (mTemperatureSensor.temperatureMode.equals("true")) {
             return (temp * 9 / 5 + 32);
-        } else if (mTemperatureSensor.temperatureMode.equals("False")) {
-            return (temp - 32) * 5 / 9;
-        } else return
-                temp;
+        } else return temp;
 
     }
 
@@ -296,7 +287,7 @@ public class MeasurementFragment extends Fragment {
         textView.setTextSize(textSize);
         textView.setWidth(width);
     }
-
+    //Hvis en klimaparameter er enten for høj eller lav, fav den korresponderende farve.
     private void setColor(TextView textView, double value) {
 
         //Temperature color:

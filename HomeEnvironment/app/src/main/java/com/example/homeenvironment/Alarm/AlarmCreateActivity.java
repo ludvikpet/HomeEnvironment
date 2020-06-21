@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import com.example.homeenvironment.MainActivity;
+
 public class AlarmCreateActivity{
     private AlarmManager alarmManager;
     private PendingIntent receiverPendingIntent;
@@ -26,7 +26,7 @@ public class AlarmCreateActivity{
 //                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
             if(s.equals("notifications")){
                 if(sharedPreferences.getBoolean(s,false)){
-                    resetAlarmNotification();
+                    startAlarmNotification();
                     Log.i("Alarm", "Restarted alarm");
                 }else{
                     Log.i("Alarm", "Cancelled alarm");
@@ -73,8 +73,8 @@ public class AlarmCreateActivity{
 
     private void startAlarmNotification(){
         alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),repeatInterval,receiverPendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,System.currentTimeMillis(),repeatInterval,receiverPendingIntent);
 
         Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "every half hour"));
     }

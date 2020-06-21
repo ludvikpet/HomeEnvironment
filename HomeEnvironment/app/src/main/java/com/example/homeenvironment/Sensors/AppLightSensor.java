@@ -23,6 +23,7 @@ public class AppLightSensor {
         lightSensor = sensorManager.getDefaultSensor(TYPE_LIGHT);
 
         lightEventListener = new SensorEventListener() {
+            //gem nyest opfangne data.
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 lightQuantity = sensorEvent.values[0];

@@ -1,9 +1,5 @@
 package com.example.homeenvironment;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -11,15 +7,11 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.util.Log;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.homeenvironment.Alarm.AlarmCreateActivity;
 import com.example.homeenvironment.Sensors.AppTemperatureSensor;
-
-import java.time.Instant;
 
 public class Settings extends PreferenceActivity {
 

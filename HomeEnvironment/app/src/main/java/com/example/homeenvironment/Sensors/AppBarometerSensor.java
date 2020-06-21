@@ -31,18 +31,19 @@ public class AppBarometerSensor {
         humiditySensor = sensorManager.getDefaultSensor(TYPE_RELATIVE_HUMIDITY);
 
         pressureEventListener = new SensorEventListener() {
+            //Gem nyeste opfangne data.
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 pressureAmount = sensorEvent.values[0];
             }
 
-            //Denne funktion skal være der for SensorEventListeners
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {
 
             }
         };
         humidityEventListener = new SensorEventListener() {
+            //Gem nyeste opfangne data.
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 humidityAmount = sensorEvent.values[0];
@@ -53,6 +54,7 @@ public class AppBarometerSensor {
 
             }
         };
+        //Sensorerne skal registreres.
         sensorManager.registerListener(pressureEventListener, pressureSensor, SensorManager.SENSOR_DELAY_UI);
         sensorManager.registerListener(humidityEventListener,humiditySensor, SensorManager.SENSOR_DELAY_UI);
     }
