@@ -1,4 +1,4 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.Alarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import com.example.homeenvironment.MainActivity;
+
 public class AlarmCreateActivity{
     private AlarmManager alarmManager;
     private PendingIntent receiverPendingIntent;
