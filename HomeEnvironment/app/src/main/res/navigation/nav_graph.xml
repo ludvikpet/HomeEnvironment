@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.homeenvironment.TipFragment"
+        android:name="com.example.homeenvironment.tips.TipFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/TipTextScreen"
-        android:name="com.example.homeenvironment.TipTextScreen"
+        android:name="com.example.homeenvironment.tips.TipTextScreen"
         android:label="@string/TipTextScreen_label"
         tools:layout="@layout/activity_tiptextscreen">
 

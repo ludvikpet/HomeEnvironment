@@ -1,20 +1,16 @@
-package com.example.homeenvironment;
+package com.example.homeenvironment.tips;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
-
-import java.util.Random;
+import com.example.homeenvironment.R;
 
 public class TipFragment extends Fragment {
 
