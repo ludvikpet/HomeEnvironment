@@ -76,7 +76,7 @@ public class SwipeListener implements View.OnTouchListener {
     }
 
     public void topSwipe() {
-        if(view.getId() == R.id.relativeLayout) {
+        if(view.getId() == R.id.relativeLayout || view.getId() == R.id.tips_layout) {
             Log.i("Swipe", "SWIPED RIGHT!");
             Intent i = new Intent(view.getContext(), Settings.class);
             view.getContext().startActivity(i);
