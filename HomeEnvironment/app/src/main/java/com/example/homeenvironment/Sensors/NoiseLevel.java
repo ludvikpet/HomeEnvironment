@@ -57,7 +57,7 @@ public class NoiseLevel extends AppCompatActivity {
         return (float) soundDb(10 * Math.exp(-3));
     }
 
-    private void onRecord(boolean start) {
+    public void onRecord(boolean start) {
         if (start) {
             startRecorder();
         }
@@ -66,7 +66,7 @@ public class NoiseLevel extends AppCompatActivity {
     /**
      * Starts the recorder and checks that there isn't already a mRecorder
      */
-    private void startRecorder() {
+    public void startRecorder() {
         if(mRecorder == null){
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -89,6 +89,7 @@ public class NoiseLevel extends AppCompatActivity {
      */
     public void stopRecorder() {
         Log.i(TAG_noise, "mRecorder stopping with stopRecorder()");
+        isRunning = false;
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
@@ -106,14 +107,12 @@ public class NoiseLevel extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         Log.i(TAG_noise, "onPause()");
-        isRunning = false;
         stopRecorder();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        isRunning = true;
         startRecorder();
     }
 

@@ -1,53 +1,40 @@
 package com.example.homeenvironment;
 
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.gesture.GestureOverlayView;
-import android.gesture.Prediction;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.DragEvent;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.ImageView;
+import android.view.MotionEvent;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_RECORD_AUDIO = 1;
+    private Constants constants = Constants.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
+        constants.setActivity(this);
 
         //Gem information fra settings.
         SharedPreferences settinf = PreferenceManager.getDefaultSharedPreferences(this);
@@ -58,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_RECORD_AUDIO);
         }
+
+
+
     }
 
     @Override

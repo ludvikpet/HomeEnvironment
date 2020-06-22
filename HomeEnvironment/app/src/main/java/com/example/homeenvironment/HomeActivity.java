@@ -13,6 +13,7 @@ package com.example.homeenvironment;
 
         import androidx.appcompat.app.AppCompatActivity;
         import androidx.appcompat.widget.Toolbar;
+        import androidx.constraintlayout.widget.ConstraintLayout;
         import androidx.core.app.ActivityCompat;
         import androidx.core.content.ContextCompat;
 
@@ -25,6 +26,7 @@ package com.example.homeenvironment;
 
         import android.view.Menu;
         import android.view.MenuItem;
+        import android.view.ViewGroup;
         import android.view.animation.Animation;
         import android.view.animation.AnimationSet;
         import android.view.animation.AnimationUtils;
@@ -39,9 +41,9 @@ public class HomeActivity extends AppCompatActivity {
     private float posX;
     private float posY;
     private static int lastAction;
-    ImageView homebg;
     Animation homeAnim;
     GestureDetector mGestureDetector;
+    ViewGroup layout;
 
     MotionEvent clickScreen;
 
@@ -49,38 +51,16 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-        homebg = (ImageView) findViewById(R.id.homebg);
+        layout = (ViewGroup) findViewById(R.id.home_activity);
         homeAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.home_anim);
 
-        homebg.startAnimation(homeAnim);
+        layout.startAnimation(homeAnim);
 
         final Intent i = new Intent(this, MainActivity.class);
 
         homeAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                if(animation.equals(homeAnim)) {
-                    Animation anim1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.leaves).startAnimation(anim1);
-
-                    Animation anim2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.greenEllipse).startAnimation(anim1);
-
-                    Animation anim3 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.whiteEllipse).startAnimation(anim1);
-
-                    Animation anim4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.lGreenEllipse).startAnimation(anim1);
-
-                    Animation anim5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.lWhiteEllipse).startAnimation(anim1);
-
-                    Animation anim6 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.other_components_anim);
-                    findViewById(R.id.logo).startAnimation(anim1);
-                }
-
-
-
             }
 
             @Override

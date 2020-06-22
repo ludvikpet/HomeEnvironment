@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,7 +17,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.homeenvironment.Alarm.AlarmCreateActivity;
@@ -43,7 +46,8 @@ public class MeasurementFragment extends Fragment {
     private boolean permissionMic;
     private View mRootView;
     private float currentNoiseLevel;
-
+    private GestureDetectorCompat mDetect;
+    private Constants constants = Constants.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class MeasurementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         permissionMic = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_DENIED;
-
+        constants.setFragment(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mLightSensor = new AppLightSensor(view);
         mBarometerSensor = new AppBarometerSensor(view);
@@ -186,6 +190,8 @@ public class MeasurementFragment extends Fragment {
                 initializePopUp(popUp);
             }
         });
+
+        view.setOnTouchListener(new SwipeListener());
 
     }
 
@@ -380,7 +386,6 @@ public class MeasurementFragment extends Fragment {
 
         }
 
-
     }
 
     @Override
@@ -395,14 +400,10 @@ public class MeasurementFragment extends Fragment {
             }
         }
     }
-
-    /*
     @Override
-    public void onStart() {
-        super.onStart();
-        alarmCreateActivity = new AlarmCreateActivity(mRootView);
-
+    public void onResume() {
+        super.onResume();
+        Log.e("Noise ", "onResume() in fragment");
+        noiseLevel.startRecorder();
     }
-    */
-
 }
