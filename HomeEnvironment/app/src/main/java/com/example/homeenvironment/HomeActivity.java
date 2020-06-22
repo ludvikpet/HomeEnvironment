@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
     Animation homeAnim;
     GestureDetector mGestureDetector;
     ViewGroup layout;
-    Context mContext = this;
     private static final int REQUEST = 112;
     MotionEvent clickScreen;
 
@@ -58,17 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_activity);
         layout = (ViewGroup) findViewById(R.id.home_activity);
         homeAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.home_anim);
-
         final Intent i = new Intent(this, MainActivity.class);
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST);
-        } else {
-            layout.startAnimation(homeAnim);
-        }
-
         homeAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -85,19 +74,24 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST);
+        } else {
+            layout.startAnimation(homeAnim);
+        }
+
+
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("TAG", "@@@ PERMISSIONS grant");
-                layout.startAnimation(homeAnim);
-            } else {
-                Log.d("TAG", "@@@ PERMISSIONS Denied");
-                Toast.makeText(mContext, "PERMISSIONS Denied", Toast.LENGTH_LONG).show();
-            }
+            layout.startAnimation(homeAnim);
+
         }
     }
 
