@@ -122,23 +122,24 @@ public class MeasurementFragment extends Fragment {
                 }
 
                 //Set correct noise level:
-                currentNoiseLevel = noiseLevel.getNoiseLevel();
-                if (noiseLevel != null && currentNoiseLevel < 0) {
-                    Log.e("NOISE", " " + noiseLevel.getAmplitude());
-                    noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
+                if (permissionMic) {
+                    currentNoiseLevel = noiseLevel.getNoiseLevel();
+                    if (noiseLevel != null && currentNoiseLevel < 0) {
+                        Log.e("NOISE", " " + noiseLevel.getAmplitude());
+                        noiseLevelText.setText(getString(R.string.noiseInfo, 0.0));
 
-                } else if (noiseLevel == null){
-                    noiseLevel = new NoiseLevel(view);
+                    } else if (noiseLevel == null) {
+                        noiseLevel = new NoiseLevel(view);
 
-                    if(currentNoiseLevel > 0) {
+                        if (currentNoiseLevel > 0) {
+                            noiseLevelText.setText(getString(R.string.noiseInfo, currentNoiseLevel));
+                        }
+                    } else {
                         noiseLevelText.setText(getString(R.string.noiseInfo, currentNoiseLevel));
                     }
-                }else {
-                    noiseLevelText.setText(getString(R.string.noiseInfo, currentNoiseLevel));
+                    Log.e("NOISE", "Current Noise Level: " + currentNoiseLevel);
                 }
-                Log.e("NOISE", "Current Noise Level: " + currentNoiseLevel);
-
-                setColor(noiseLevelText,  currentNoiseLevel);
+                setColor(noiseLevelText, currentNoiseLevel);
 
                 //Start alarm
                 alarmCreateActivity.resetAlarmNotification();
@@ -291,18 +292,19 @@ public class MeasurementFragment extends Fragment {
         textView.setTextSize(textSize);
         textView.setWidth(width);
     }
+
     //Hvis en klimaparameter er enten for høj eller lav, fav den korresponderende farve.
     private void setColor(TextView textView, double value) {
 
         //Temperature color:
-        if(textView.equals(temperatureText)) {
+        if (textView.equals(temperatureText)) {
 
-            if(mTemperatureSensor.temperatureMode.equals("true")) {
+            if (mTemperatureSensor.temperatureMode.equals("true")) {
 
-                if(value >= 68 && value <= 74.3) {
+                if (value >= 68 && value <= 74.3) {
                     temperatureText.setTextColor(getResources().getColor(R.color.green_measure));
 
-                } else if(value >= 68 && value <= 74.3) {
+                } else if (value >= 68 && value <= 74.3) {
                     temperatureText.setTextColor(getResources().getColor(R.color.yellow_measure));
 
                 } else {
@@ -312,10 +314,10 @@ public class MeasurementFragment extends Fragment {
 
             } else {
 
-                if(value >= 21.5 && value <= 22.5) {
+                if (value >= 21.5 && value <= 22.5) {
                     temperatureText.setTextColor(getResources().getColor(R.color.green_measure));
 
-                } else if(value >= 20 && value <= 23.5) {
+                } else if (value >= 20 && value <= 23.5) {
                     temperatureText.setTextColor(getResources().getColor(R.color.yellow_measure));
 
                 } else {
@@ -328,40 +330,36 @@ public class MeasurementFragment extends Fragment {
         }
 
         //Pressure color:
-        else if(textView.equals(pressureText)) {
+        else if (textView.equals(pressureText)) {
             //mBarometerSensor.getPressure()
-            if(value >= 950  && value <= 1050) {
+            if (value >= 950 && value <= 1050) {
                 textView.setTextColor(getResources().getColor(R.color.green_measure));
 
-            } else if(value >= 900 && value <= 1100) {
+            } else if (value >= 900 && value <= 1100) {
                 textView.setTextColor(getResources().getColor(R.color.yellow_measure));
 
             } else {
                 textView.setTextColor(getResources().getColor(R.color.red_measure));
 
             }
-        }
+        } else if (textView.equals(luxText)) {
 
-        else if(textView.equals(luxText)) {
-
-            if(value >= 300  && value <= 500) {
+            if (value >= 300 && value <= 500) {
                 textView.setTextColor(getResources().getColor(R.color.green_measure));
 
-            } else if(value >= 250 && value <= 550) {
+            } else if (value >= 250 && value <= 550) {
                 textView.setTextColor(getResources().getColor(R.color.yellow_measure));
 
             } else {
                 textView.setTextColor(getResources().getColor(R.color.red_measure));
 
             }
-        }
+        } else if (textView.equals(humidityText)) {
 
-        else if(textView.equals(humidityText)) {
-
-            if(value >= 45  && value <= 55) {
+            if (value >= 45 && value <= 55) {
                 textView.setTextColor(getResources().getColor(R.color.green_measure));
 
-            } else if(value >= 20 && value <= 70) {
+            } else if (value >= 20 && value <= 70) {
                 textView.setTextColor(getResources().getColor(R.color.yellow_measure));
 
             } else {
@@ -369,14 +367,12 @@ public class MeasurementFragment extends Fragment {
 
             }
 
-        }
+        } else if (textView.equals(noiseLevelText)) {
 
-        else if(textView.equals(noiseLevelText)) {
-
-            if(value < 60.0) {
+            if (value < 60.0) {
                 textView.setTextColor(getResources().getColor(R.color.green_measure));
 
-            } else if(value >= 60.0  && value <= 65.0) {
+            } else if (value >= 60.0 && value <= 65.0) {
                 textView.setTextColor(getResources().getColor(R.color.yellow_measure));
 
             } else {
@@ -400,10 +396,11 @@ public class MeasurementFragment extends Fragment {
             }
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
         Log.e("Noise ", "onResume() in fragment");
-        noiseLevel.startRecorder();
+        if(noiseLevel != null )noiseLevel.startRecorder();
     }
 }
