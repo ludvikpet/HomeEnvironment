@@ -397,4 +397,10 @@ public class MeasurementFragment extends Fragment {
             }
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("Noise ", "onResume() in fragment");
+        noiseLevel.startRecorder();
+    }
 }
