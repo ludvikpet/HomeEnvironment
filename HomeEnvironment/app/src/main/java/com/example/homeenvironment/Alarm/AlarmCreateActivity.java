@@ -17,7 +17,7 @@ public class AlarmCreateActivity{
     private Context context;
     private SharedPreferences sharedPreferences;
     private static long repeatInterval = AlarmManager.INTERVAL_HALF_HOUR;
-
+    // OnSharedPreferenceChangeListener that listens after changes to settings.
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener =
             new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
@@ -25,18 +25,17 @@ public class AlarmCreateActivity{
             Log.i("Alarm", "Key: "+s);
             if(s.equals("notifications")){
                 if(sharedPreferences.getBoolean(s,false)){
-                    startAlarmNotification();
+                    startRepeatingAlarmToNotify();
 
                 }else{
                     Log.i("Alarm", "Cancelled alarm");
-                    cancelAlarmNotification();
+                    cancelRepeatingAlarmToNotify();
                 }
             }
-            if(s.equals("time_interval")) {
-                repeatInterval = setRepeatInterval();
+            else if(s.equals("time_interval")) {
+                repeatInterval = newRepeatInterval();
                 resetAlarmNotification();
             }
-
         }
     };
 
@@ -51,7 +50,7 @@ public class AlarmCreateActivity{
     }
 
 
-    private  long setRepeatInterval(){
+    private  long newRepeatInterval(){
         String[] newInterval = sharedPreferences.getString("time_interval","every half hour").split(" ");
         Log.i("Alarm",""+ newInterval.length);
         String text = "";
@@ -71,12 +70,12 @@ public class AlarmCreateActivity{
 
     }
 
-    private void startAlarmNotification(){
+    private void startRepeatingAlarmToNotify(){
         alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+repeatInterval, repeatInterval,receiverPendingIntent);
         Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "every half hour"));
     }
-    private void cancelAlarmNotification(){
+    private void cancelRepeatingAlarmToNotify(){
         if(alarmManager != null){
             alarmManager.cancel(receiverPendingIntent);
             Log.i("Alarm", "AlarmCreateActivity her! has cancel alarm ");
@@ -84,8 +83,8 @@ public class AlarmCreateActivity{
     }
     public void resetAlarmNotification(){
         if(sharedPreferences.getBoolean("notifications",false)){
-            cancelAlarmNotification();
-            startAlarmNotification();
+            cancelRepeatingAlarmToNotify();
+            startRepeatingAlarmToNotify();
             Log.i("Alarm", "Restarted alarm");
         }
     }

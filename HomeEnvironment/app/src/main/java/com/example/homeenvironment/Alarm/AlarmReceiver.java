@@ -26,56 +26,42 @@ import java.util.Date;
 public class AlarmReceiver extends BroadcastReceiver {
 
 
-    private static final String TAG = "AlarmNoti";
-    // Notification ID to allow for future updates
+    private static final String TAG = "AlarmReceiver";
     private static final int NOTIFICATION_ID = 1;
-
-    // Notification Text Elements
-    private final CharSequence tickerText = "Hello";
     private final CharSequence contentTitle ="HomeEnvironment";
     private final CharSequence contentText = "it is a long time since, you have check your home Environment";
-
-    // Notification Action Elements
     private Intent notificationIntent;
     private PendingIntent contentIntent;
-
-    // Notification Sound and Vibration on Arrival
     private final long[] vibratePattern = {100, 100, 100, 400, 400, 100, 100, 100};
-
-
+    private Uri uri;
+    private NotificationManager notificationManager;
 
     @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Log receipt of the Intent with timestamp
-        Log.i(TAG,DateFormat.getDateTimeInstance().format(new Date()));
-// The Intent to be used when the user clicks on the Notification View
+
+        // When user clicks on the notification the following intent is used
         notificationIntent = new Intent(context, MainActivity.class);
 
-        // The PendingIntent that wraps the underlying Intent
         contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        // Set the notifications ringtone to the smartphone default
+        uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
 
-        // Build the Notification
+        // Building the Notification
         Notification.Builder notificationBuilder = new Notification.Builder(
-                context).setTicker(tickerText)
-                .setSmallIcon(R.drawable.ic_stat_name)
+                context).setSmallIcon(R.drawable.ic_stat_name)
                 .setAutoCancel(true).setContentTitle(contentTitle)
                 .setContentText(contentText).setContentIntent(contentIntent)
                 .setSound(uri).setVibrate(vibratePattern);
 
-        // Get the NotificationManager
-        NotificationManager notificationManager = (NotificationManager) context
+        notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Pass the Notification to the NotificationManager:
+        // Sends the notification
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
-
-        // Log occurence of notify() call
-        Log.i(TAG, "AlarmReceiver her! has Received Alarm:"
-                + DateFormat.getDateTimeInstance().format(new Date()));
+        Log.i(TAG, " has Received Alarm: " + DateFormat.getDateTimeInstance().format(new Date()));
 
     }
 
