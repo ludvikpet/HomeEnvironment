@@ -67,12 +67,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSound(uri).setVibrate(vibratePattern);
 
         // Get the NotificationManager
-        NotificationManager mNotificationManager = (NotificationManager) context
+        NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Pass the Notification to the NotificationManager:
-        mNotificationManager.notify(NOTIFICATION_ID,
-                notificationBuilder.build());
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
 
         // Log occurence of notify() call
         Log.i(TAG, "AlarmReceiver her! has Received Alarm:"

@@ -23,12 +23,10 @@ public class AlarmCreateActivity{
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
             Log.i("Alarm", "Key: "+s);
-
-//                Log.i("Alarm", sharedPreferences.getBoolean(s,false)+"");
             if(s.equals("notifications")){
                 if(sharedPreferences.getBoolean(s,false)){
                     startAlarmNotification();
-                    Log.i("Alarm", "Restarted alarm");
+
                 }else{
                     Log.i("Alarm", "Cancelled alarm");
                     cancelAlarmNotification();
@@ -75,9 +73,7 @@ public class AlarmCreateActivity{
 
     private void startAlarmNotification(){
         alarmManager =(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), receiverPendingIntent);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), repeatInterval,receiverPendingIntent);
-
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+repeatInterval, repeatInterval,receiverPendingIntent);
         Log.i("Alarm", "AlarmCreateActivity her! has set repeating ----->" + sharedPreferences.getString("time_interval", "every half hour"));
     }
     private void cancelAlarmNotification(){
@@ -90,6 +86,7 @@ public class AlarmCreateActivity{
         if(sharedPreferences.getBoolean("notifications",false)){
             cancelAlarmNotification();
             startAlarmNotification();
+            Log.i("Alarm", "Restarted alarm");
         }
     }
 

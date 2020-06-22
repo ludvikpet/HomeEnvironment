@@ -64,6 +64,7 @@ public class MeasurementFragment extends Fragment {
         mTemperatureSensor = new AppTemperatureSensor(view);
         // TODO Remove/move alarmCreateActivity
         final AlarmCreateActivity alarmCreateActivity = new AlarmCreateActivity(view);
+        alarmCreateActivity.resetAlarmNotification();
         luxText = view.findViewById(R.id.lightID);
         pressureText = view.findViewById(R.id.pressureID);
         humidityText = view.findViewById(R.id.humidityID);
@@ -135,11 +136,8 @@ public class MeasurementFragment extends Fragment {
 
                 setColor(noiseLevelText,  currentNoiseLevel);
 
-                //Start alarm, if notifications are turned on:
-                if (sharedPreferences.getBoolean("notifications", false)) {
-                    alarmCreateActivity.resetAlarmNotification();
-                }
-
+                //Start alarm
+                alarmCreateActivity.resetAlarmNotification();
             }
         });
         //Sæt onClickListeners på alle informationsknapperne på siden og sørg for at den
@@ -397,4 +395,14 @@ public class MeasurementFragment extends Fragment {
             }
         }
     }
+
+    /*
+    @Override
+    public void onStart() {
+        super.onStart();
+        alarmCreateActivity = new AlarmCreateActivity(mRootView);
+
+    }
+    */
+
 }
