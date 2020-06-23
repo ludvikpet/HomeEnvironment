@@ -80,6 +80,6 @@ public class TipFragment extends Fragment {
         private void initializePopUp(Intent popUp) {
         popUp.putExtra("info/tip", "tip");
         startActivity(popUp);
-
+        Animatoo.animateFade(getContext());
     }
 }

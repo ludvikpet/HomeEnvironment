@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.homeenvironment.Alarm.AlarmCreateActivity;
 import com.example.homeenvironment.Sensors.AppBarometerSensor;
 import com.example.homeenvironment.Sensors.AppLightSensor;
@@ -199,6 +200,7 @@ public class MeasurementFragment extends Fragment {
     private void initializePopUp(Intent popUp) {
         popUp.putExtra("info/tip", "info");
         startActivity(popUp);
+        Animatoo.animateFade(getContext());
     }
 
     private Float getTemperature() {
